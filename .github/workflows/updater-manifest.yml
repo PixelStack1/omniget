@@ -1,0 +1,206 @@
+# Signs the updater bundles of an existing release and (re)generates its
+# latest.json, without rebuilding anything. Use it when the Release workflow
+# uploaded bundles but its sign-updater / upload-updater-json jobs did not run
+# (for example a platform job never got a runner), or after attaching bundles
+# for a platform later (e.g. macOS) to the same release.
+#
+# - Only bundles that have no .sig on the release yet are signed, so existing
+#   signatures are kept and the job can be rerun safely.
+# - latest.json lists every platform whose updater bundle and .sig are on the
+#   release; missing platforms are simply left out (clients on them see no
+#   update and stay on their version).
+# - Same isolation as release.yml: the job holding the signing key has no
+#   GITHUB_TOKEN permissions and never runs the project build.
+name: Updater manifest for an existing release
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Existing release tag (e.g. v0.15.2); the release may be a draft'
+        required: true
+      chrome_extension:
+        description: 'Also package and upload the Chrome extension zip'
+        type: boolean
+        default: false
+
+permissions: {}
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # needed to read draft releases
+    outputs:
+      count: ${{ steps.dl.outputs.count }}
+    steps:
+      - name: Download unsigned updater bundles (token only)
+        id: dl
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAG: ${{ inputs.tag }}
+        run: |
+          set -euo pipefail
+          ASSETS=$(gh release view "$TAG" --repo "$GITHUB_REPOSITORY" --json assets -q '.assets[].name')
+          mkdir -p updater-unsigned
+          COUNT=0
+          while IFS= read -r name; do
+            case "$name" in
+              *.app.tar.gz|*.AppImage|*.deb|*.rpm|*-setup.exe|*.msi) ;;
+              *) continue ;;
+            esac
+            if grep -qxF "$name.sig" <<<"$ASSETS"; then
+              echo "Already signed: $name"
+              continue
+            fi
+            echo "To sign: $name"
+            gh release download "$TAG" --repo "$GITHUB_REPOSITORY" --pattern "$name" --dir updater-unsigned --clobber
+            COUNT=$((COUNT + 1))
+          done <<<"$ASSETS"
+          echo "count=$COUNT" >> "$GITHUB_OUTPUT"
+
+      - name: Hand files to the signing job
+        if: steps.dl.outputs.count != '0'
+        uses: actions/upload-artifact@v4
+        with:
+          name: updater-unsigned
+          path: updater-unsigned/
+          if-no-files-found: error
+          retention-days: 1
+
+  sign:
+    needs: collect
+    if: needs.collect.outputs.count != '0'
+    runs-on: ubuntu-latest
+    permissions: {}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+          sparse-checkout: |
+            pnpm-lock.yaml
+            scripts/pinned-tauri-cli.mjs
+          sparse-checkout-cone-mode: false
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: lts/*
+
+      - name: Install pinned Tauri CLI
+        id: cli
+        run: echo "tauri=$(node scripts/pinned-tauri-cli.mjs "$RUNNER_TEMP/tauri-cli")" >> "$GITHUB_OUTPUT"
+
+      - name: Download files to sign
+        uses: actions/download-artifact@v4
+        with:
+          name: updater-unsigned
+          path: unsigned
+
+      - name: Sign updater artifacts (signing key only)
+        env:
+          TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
+          TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}
+        run: |
+          set -euo pipefail
+          if [ -z "$TAURI_SIGNING_PRIVATE_KEY" ]; then
+            echo "::error::No updater signing key configured."
+            exit 1
+          fi
+          mkdir -p signatures
+          for f in unsigned/*; do
+            node "${{ steps.cli.outputs.tauri }}" signer sign "$f"
+            mv "$f.sig" signatures/
+          done
+
+      - name: Hand signatures to the upload job
+        uses: actions/upload-artifact@v4
+        with:
+          name: updater-signatures
+          path: signatures/
+          if-no-files-found: error
+          retention-days: 1
+
+  manifest:
+    needs: [collect, sign]
+    if: always() && needs.collect.result == 'success' && (needs.sign.result == 'success' || needs.sign.result == 'skipped')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Download updater signatures
+        if: needs.sign.result == 'success'
+        uses: actions/download-artifact@v4
+        with:
+          name: updater-signatures
+          path: signatures
+
+      - name: Upload signatures and latest.json (token only)
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAG: ${{ inputs.tag }}
+        run: |
+          set -euo pipefail
+          REPO="$GITHUB_REPOSITORY"
+          VERSION="${TAG#v}"
+          for f in signatures/*.sig; do
+            [ -f "$f" ] || continue
+            gh release upload "$TAG" "$f" --repo "$REPO" --clobber
+          done
+
+          ASSETS=$(gh release view "$TAG" --repo "$REPO" --json assets -q '.assets[].name')
+          JSON=$(jq -n --arg v "$VERSION" --arg d "$(date -u +%Y-%m-%dT%H:%M:%SZ)" \
+            '{version: $v, notes: "", pub_date: $d, platforms: {}}')
+          declare -A PLATFORM_MAP=(
+            ["aarch64.app.tar.gz"]="darwin-aarch64"
+            ["x64.app.tar.gz"]="darwin-x86_64"
+            ["amd64.AppImage"]="linux-x86_64"
+            ["aarch64.AppImage"]="linux-aarch64"
+            ["x64-setup.exe"]="windows-x86_64"
+          )
+          TMP=$(mktemp -d)
+          for SUFFIX in "${!PLATFORM_MAP[@]}"; do
+            PLATFORM="${PLATFORM_MAP[$SUFFIX]}"
+            BUNDLE=$(grep -E "_${VERSION}_${SUFFIX//./\\.}$" <<<"$ASSETS" | head -n 1 || true)
+            if [ -z "$BUNDLE" ] || ! grep -qxF "$BUNDLE.sig" <<<"$ASSETS"; then
+              echo "::notice::$PLATFORM: no signed bundle on $TAG, left out of latest.json"
+              continue
+            fi
+            gh release download "$TAG" --repo "$REPO" --pattern "$BUNDLE.sig" --dir "$TMP" --clobber
+            JSON=$(jq --arg p "$PLATFORM" --arg sig "$(cat "$TMP/$BUNDLE.sig")" \
+              --arg url "https://github.com/${REPO}/releases/download/${TAG}/${BUNDLE}" \
+              '.platforms[$p] = {signature: $sig, url: $url}' <<<"$JSON")
+          done
+          if [ "$(jq '.platforms | length' <<<"$JSON")" -eq 0 ]; then
+            echo "::error::No signed updater bundle found on $TAG"
+            exit 1
+          fi
+          echo "$JSON" > latest.json
+          jq '{version, pub_date, platforms: (.platforms | map_values(.url))}' latest.json
+          gh release upload "$TAG" latest.json --repo "$REPO" --clobber
+
+  chrome-extension:
+    if: inputs.chrome_extension
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ inputs.tag }}
+          persist-credentials: false
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: lts/*
+
+      - name: Package and upload Chrome extension
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAG: ${{ inputs.tag }}
+        run: |
+          VERSION="${TAG#v}"
+          OUTPUT="omniget-chrome-extension-v${VERSION}.zip"
+          node browser-extension/chrome/scripts/package.mjs --version "$VERSION" --output "$OUTPUT"
+          gh release upload "$TAG" "$OUTPUT" --repo "$GITHUB_REPOSITORY" --clobber
