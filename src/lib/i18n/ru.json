@@ -5027,6 +5027,10 @@
         "maintainer": "На странице «О программе» указан сопровождающий форка (Corpse), OpenSelena по-прежнему упомянута.",
         "fork_links": "Кнопки GitHub и примечания к выпуску ведут на PixelStack1/omniget.",
         "translations": "Страницы «О программе» и список загрузок переведены на все языки."
+      },
+      "fixes_0152": {
+        "title": "Исправления 0.15.2",
+        "appimage_ld_path": "В AppImage для Linux yt-dlp и системный FFmpeg больше не завершаются с ошибкой: дочерние процессы больше не наследуют LD_LIBRARY_PATH из AppImage (OpenSelena/omniget#147)."
       }
     }
   },

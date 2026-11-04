@@ -5027,6 +5027,10 @@
         "maintainer": "「情報」ページにフォークのメンテナー (Corpse) を表示し、OpenSelena のクレジットも残しました。",
         "fork_links": "GitHub ボタンとリリースノートは PixelStack1/omniget を参照します。",
         "translations": "「情報」ページとダウンロード一覧が全言語に翻訳されました。"
+      },
+      "fixes_0152": {
+        "title": "0.15.2 の修正",
+        "appimage_ld_path": "Linux の AppImage で、yt-dlp とシステムの FFmpeg が失敗しなくなりました。子プロセスが AppImage の LD_LIBRARY_PATH を継承しなくなりました (OpenSelena/omniget#147)。"
       }
     }
   },

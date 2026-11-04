@@ -5027,6 +5027,10 @@
         "maintainer": "關於頁面顯示分支維護者 (Corpse)，並保留 OpenSelena 的署名。",
         "fork_links": "GitHub 按鈕與發行說明指向 PixelStack1/omniget。",
         "translations": "關於頁面與下載清單已翻譯為所有語言。"
+      },
+      "fixes_0152": {
+        "title": "0.15.2 修正",
+        "appimage_ld_path": "在 Linux AppImage 中，yt-dlp 與系統 FFmpeg 不再失敗：子行程不再繼承 AppImage 的 LD_LIBRARY_PATH (OpenSelena/omniget#147)。"
       }
     }
   },

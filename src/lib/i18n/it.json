@@ -5027,6 +5027,10 @@
         "maintainer": "La pagina Informazioni mostra il manutentore del fork (Corpse) e continua a citare OpenSelena.",
         "fork_links": "I pulsanti GitHub e le note di versione puntano a PixelStack1/omniget.",
         "translations": "Le pagine Informazioni e l'elenco dei download sono tradotti in tutte le lingue."
+      },
+      "fixes_0152": {
+        "title": "Correzioni della 0.15.2",
+        "appimage_ld_path": "Nell'AppImage per Linux, yt-dlp e l'FFmpeg di sistema non falliscono più: i processi figli non ereditano più il LD_LIBRARY_PATH dell'AppImage (OpenSelena/omniget#147)."
       }
     }
   },

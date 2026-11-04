@@ -5027,6 +5027,10 @@
         "maintainer": "صفحه درباره، نگهدارنده فورک (Corpse) را نشان می‌دهد و همچنان از OpenSelena نام می‌برد.",
         "fork_links": "دکمه‌های GitHub و یادداشت‌های انتشار به PixelStack1/omniget اشاره می‌کنند.",
         "translations": "صفحات درباره و فهرست دانلودها به همه زبان‌ها ترجمه شده‌اند."
+      },
+      "fixes_0152": {
+        "title": "اصلاحات 0.15.2",
+        "appimage_ld_path": "در AppImage لینوکس، yt-dlp و FFmpeg سیستم دیگر با خطا مواجه نمی‌شوند: فرایندهای فرزند دیگر LD_LIBRARY_PATH مربوط به AppImage را به ارث نمی‌برند (OpenSelena/omniget#147)."
       }
     }
   },

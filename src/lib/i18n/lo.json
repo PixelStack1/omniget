@@ -5027,6 +5027,10 @@
         "maintainer": "ໜ້າກ່ຽວກັບສະແດງຜູ້ດູແລ fork (Corpse) ແລະ ຍັງໃຫ້ເຄຣດິດ OpenSelena.",
         "fork_links": "ປຸ່ມ GitHub ແລະ ບັນທຶກເວີຊັນຊີ້ໄປທີ່ PixelStack1/omniget.",
         "translations": "ໜ້າກ່ຽວກັບ ແລະ ລາຍການດາວໂຫຼດຖືກແປເປັນທຸກພາສາ."
+      },
+      "fixes_0152": {
+        "title": "ການແກ້ໄຂ 0.15.2",
+        "appimage_ld_path": "ໃນ AppImage ສຳລັບ Linux, yt-dlp ແລະ FFmpeg ຂອງລະບົບບໍ່ລົ້ມເຫຼວອີກຕໍ່ໄປ: ໂປຣເຊສລູກບໍ່ສືບທອດ LD_LIBRARY_PATH ຂອງ AppImage ອີກແລ້ວ (OpenSelena/omniget#147)."
       }
     }
   },

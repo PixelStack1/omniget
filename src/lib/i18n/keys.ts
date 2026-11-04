@@ -102,6 +102,8 @@ export type TranslationKeys =
   | 'changelog.notes.fixes_0151.maintainer'
   | 'changelog.notes.fixes_0151.title'
   | 'changelog.notes.fixes_0151.translations'
+  | 'changelog.notes.fixes_0152.appimage_ld_path'
+  | 'changelog.notes.fixes_0152.title'
   | 'changelog.notes.heading'
   | 'changelog.notes.security.checksums'
   | 'changelog.notes.security.ci'

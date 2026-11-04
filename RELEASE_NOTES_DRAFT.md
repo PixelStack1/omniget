@@ -1,4 +1,9 @@
-# OmniGet v0.15.1 – draft release notes (branch `work`, based on v0.15.0)
+# OmniGet v0.15.2 – draft release notes (based on v0.15.1)
+
+## Fixes
+- Fix: on Linux AppImage, yt-dlp and system FFmpeg failed because child processes inherited the AppImage's LD_LIBRARY_PATH (OpenSelena/omniget#147).
+
+## OmniGet v0.15.1 – draft release notes (branch `work`, based on v0.15.0)
 
 Local draft only. Nothing has been tagged, pushed or released.
 
