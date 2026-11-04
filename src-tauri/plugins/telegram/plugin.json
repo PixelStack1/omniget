@@ -6,7 +6,7 @@
   "description": "Download photos, videos, files, and audio from Telegram channels and groups with QR code or phone login.",
   "author": "OpenSelena",
   "license": "GPL-3.0",
-  "homepage": "https://github.com/OpenSelena/omniget-plugin-telegram",
+  "homepage": "https://github.com/PixelStack1/omniget/tree/main/src-tauri/plugins/telegram",
   "icon": "assets/icon.png",
   "nav": [
     {

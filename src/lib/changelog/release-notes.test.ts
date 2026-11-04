@@ -36,6 +36,13 @@ describe("bundled release notes", () => {
   it("exist for the current version and cover this branch", () => {
     expect(notes).toBeDefined();
     const items = notes!.sections.flatMap((s) => s.items);
+    for (const topic of ["video_button", "about_maintainer", "fork_links"]) {
+      expect(items.some((k) => k.endsWith(`.${topic}`)), topic).toBe(true);
+    }
+  });
+
+  it("keep the 0.15.2 notes", () => {
+    const items = releaseNotesFor("0.15.2")!.sections.flatMap((s) => s.items);
     expect(items.some((k) => k.endsWith(".appimage_ld_path"))).toBe(true);
   });
 

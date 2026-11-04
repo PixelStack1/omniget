@@ -43,21 +43,33 @@ describe("publisher metadata", () => {
     }
   });
 
-  it("README, About and LICENSE keep the original credits", () => {
+  it("README and LICENSE keep the original credits and the GPL", () => {
     expect(read("README.md")).toMatch(/OpenSelena/);
-    expect(read("src/routes/about/+page.svelte")).toMatch(/@OpenSelena/);
+    expect(read("LICENSE")).toMatch(/GNU GENERAL PUBLIC LICENSE/);
   });
 
-  it("the About page names the fork maintainer", () => {
+  it("the About page credits only the fork maintainer", () => {
     const about = read("src/routes/about/+page.svelte");
     expect(about).toMatch(/@PixelStack1/);
     expect(about).toMatch(/github\.com\/PixelStack1\/omniget/);
+    expect(about).not.toMatch(/OpenSelena/i);
+    expect(about).not.toMatch(/t\.me\//);
+    expect(about).not.toMatch(/about\.(based_on|telegram_button)/);
     expect(read("src/routes/about/project/+page.svelte")).toMatch(/PixelStack1\/omniget/);
-    for (const file of fs.readdirSync(path.join(root, "src/lib/i18n")).filter((f) => f.endsWith(".json"))) {
-      const about18n = JSON.parse(read(`src/lib/i18n/${file}`)).about;
-      expect(about18n.credit, file).toMatch(/Corpse/);
-      expect(about18n.based_on, file).toMatch(/OpenSelena/);
+    expect(read("src/routes/about/project/+page.svelte")).not.toMatch(/OpenSelena/i);
+    expect(read("src/lib/i18n/keys.ts")).not.toMatch(/about\.(based_on|telegram_button)/);
+    const files = fs.readdirSync(path.join(root, "src/lib/i18n")).filter((f) => f.endsWith(".json"));
+    expect(files.length).toBe(12);
+    for (const file of files) {
+      const dict = JSON.parse(read(`src/lib/i18n/${file}`));
+      expect(dict.about.credit, file).toMatch(/Corpse/);
+      expect(dict.about.based_on, file).toBeUndefined();
+      expect(dict.about.telegram_button, file).toBeUndefined();
+      // The About section and the changelog shown under About stay free of it.
+      expect(JSON.stringify(dict.about), file).not.toMatch(/OpenSelena/i);
+      expect(JSON.stringify(dict.changelog), file).not.toMatch(/OpenSelena/i);
     }
-    expect(read("LICENSE")).toMatch(/GNU GENERAL PUBLIC LICENSE/);
+    expect(JSON.parse(read("src/lib/i18n/en.json")).about.credit).toBe("Taken over and fully improved by Corpse");
+    expect(JSON.parse(read("src/lib/i18n/fr.json")).about.credit).toBe("Repris et entièrement amélioré par Corpse");
   });
 });

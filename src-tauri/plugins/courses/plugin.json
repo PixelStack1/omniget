@@ -6,7 +6,7 @@
   "description": "Download full courses from 35+ education platforms including Hotmart, Udemy, Kiwify, Teachable, Kajabi, and more.",
   "author": "OpenSelena",
   "license": "GPL-3.0",
-  "homepage": "https://github.com/OpenSelena/omniget-plugin-courses",
+  "homepage": "https://github.com/PixelStack1/omniget/tree/main/src-tauri/plugins/courses",
   "icon": "assets/icon.png",
   "nav": [
     {

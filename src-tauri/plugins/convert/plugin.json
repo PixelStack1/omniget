@@ -6,7 +6,7 @@
   "description": "Convert videos and audio between formats with FFmpeg and GPU hardware acceleration.",
   "author": "OpenSelena",
   "license": "GPL-3.0",
-  "homepage": "https://github.com/OpenSelena/omniget-plugin-convert",
+  "homepage": "https://github.com/PixelStack1/omniget/tree/main/src-tauri/plugins/convert",
   "icon": "assets/icon.png",
   "nav": [
     {

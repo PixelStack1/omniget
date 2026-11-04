@@ -286,5 +286,23 @@
   },
   "popup_manifest_gone": {
     "message": "Esa lista se encontró en una página que ya se recargó: ábrela de nuevo"
+  },
+  "overlay_button_label": {
+    "message": "Descargar con OmniGet"
+  },
+  "overlay_no_media": {
+    "message": "Aún no se ha detectado ningún vídeo: reprodúcelo y vuelve a intentarlo"
+  },
+  "options_overlay_label": {
+    "message": "Mostrar el botón de descarga en los vídeos"
+  },
+  "options_overlay_hint": {
+    "message": "Añade un pequeño botón de OmniGet en la esquina superior derecha de un vídeo al pasar el ratón por encima."
+  },
+  "options_overlay_on": {
+    "message": "Botón de descarga en los vídeos activado."
+  },
+  "options_overlay_off": {
+    "message": "Botón de descarga en los vídeos desactivado."
   }
 }

@@ -1,7 +1,7 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
   "productName": "OmniGet",
-  "version": "0.15.2",
+  "version": "0.15.3",
   "identifier": "com.openselena.omniget",
   "build": {
     "beforeDevCommand": "pnpm dev",
@@ -47,9 +47,9 @@
   },
   "plugins": {
     "updater": {
-      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDlCNTZBNUMzRTY2MEIwN0MKUldSOHNHRG13NlZXbTc2N0Z0aTV5elV3MGQ2ci9zUm1jOHpna2ozY2pJRkJMSEdXNU5UeU0rZ0sK",
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IEM4QjE4MjU5Qjk2OEU1OTEKUldTUjVXaTVXWUt4eUs3L2ZndGlia0tRbGFkeFZhcWVIbytxczBIYmVzOGFjckJHMDFPcjBkRFUK",
       "endpoints": [
-        "https://github.com/OpenSelena/omniget/releases/latest/download/latest.json"
+        "https://github.com/PixelStack1/omniget/releases/latest/download/latest.json"
       ]
     },
     "deep-link": {

@@ -389,7 +389,7 @@ pub fn run() {
                 if core::portable::portable_webview_dir_from_env().is_some() {
                     tracing::warn!(
                         "[portable] no macOS o WebView guarda dados em ~/Library mesmo em modo \
-                         portatil — o wry nao permite redirecionar. Ver github.com/OpenSelena/omniget/issues/227"
+                         portatil — o wry nao permite redirecionar. Ver github.com/PixelStack1/omniget/issues"
                     );
                 }
 

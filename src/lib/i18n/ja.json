@@ -4323,7 +4323,7 @@
       "silence_done": "無音 {{saved}} 分を検出 — 再生時にスキップできます",
       "portable_label": "ポータブルモード",
       "portable_active": "ポータブルモードが有効です。OmniGet のデータは {{dir}} に保存されます。",
-      "portable_macos_notice": "macOS では WebView がセッションデータを ~/Library に保存し続けるため、ポータブルモードでは移動できません。ここでポータブルになるのは OmniGet 自身のデータだけです。github.com/OpenSelena/omniget/issues/227 を参照してください。"
+      "portable_macos_notice": "macOS では WebView がセッションデータを ~/Library に保存し続けるため、ポータブルモードでは移動できません。ここでポータブルになるのは OmniGet 自身のデータだけです。github.com/PixelStack1/omniget/issues を参照してください。"
     },
     "dependencies": {
       "title": "依存関係",
@@ -4869,9 +4869,7 @@
     "roadmap_community_discord": "Discordでお気軽にどうぞ：",
     "roadmap_community_issue": "またはリポジトリでIssueを作成してください：",
     "tagline": "どこからでも、何でもダウンロード。",
-    "credit": "メンテナー: Corpse",
-    "based_on": "OpenSelena の OmniGet をベースにしています",
-    "telegram_button": "OpenSelena の Telegram"
+    "credit": "Corpse が引き継ぎ、全面的に改良しました"
   },
   "marketplace": {
     "title": "マーケットプレイス",
@@ -4991,7 +4989,7 @@
         "file_actions": "音声と画像のダウンロードでもファイル操作が使えます。",
         "slideshow": "音楽付きの TikTok 写真投稿からスライドショー動画も作成します。設定でオフにできます。",
         "h265": "互換性を高めるため、既定で H.265 動画を避けます。",
-        "publisher": "Windows 版では発行元として Corpse が表示されます。OmniGet は OpenSelena とその貢献者の成果に基づいています。"
+        "publisher": "Windows 版では発行元として Corpse が表示されます。"
       },
       "security": {
         "title": "セキュリティ",
@@ -5024,13 +5022,19 @@
       },
       "fixes_0151": {
         "title": "0.15.1 の修正",
-        "maintainer": "「情報」ページにフォークのメンテナー (Corpse) を表示し、OpenSelena のクレジットも残しました。",
+        "maintainer": "「情報」ページにフォークのメンテナー (Corpse) を表示します。",
         "fork_links": "GitHub ボタンとリリースノートは PixelStack1/omniget を参照します。",
         "translations": "「情報」ページとダウンロード一覧が全言語に翻訳されました。"
       },
       "fixes_0152": {
         "title": "0.15.2 の修正",
-        "appimage_ld_path": "Linux の AppImage で、yt-dlp とシステムの FFmpeg が失敗しなくなりました。子プロセスが AppImage の LD_LIBRARY_PATH を継承しなくなりました (OpenSelena/omniget#147)。"
+        "appimage_ld_path": "Linux の AppImage で、yt-dlp とシステムの FFmpeg が失敗しなくなりました。子プロセスが AppImage の LD_LIBRARY_PATH を継承しなくなりました。"
+      },
+      "changes_0153": {
+        "title": "0.15.3 の新機能",
+        "video_button": "ブラウザー拡張機能: 動画にカーソルを合わせると「OmniGet でダウンロード」ボタンが表示されます。拡張機能のオプションでオフにできます。",
+        "about_maintainer": "「情報」ページにメンテナーの Corpse を表示するようになりました。",
+        "fork_links": "アプリ、拡張機能、ドキュメント内のリンクが PixelStack1/omniget を指すようになりました。"
       }
     }
   },

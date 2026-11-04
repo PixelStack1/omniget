@@ -19,7 +19,6 @@
  */
 
 export type TranslationKeys =
-  | 'about.based_on'
   | 'about.card_changelog_desc'
   | 'about.card_changelog_title'
   | 'about.card_project_desc'
@@ -68,12 +67,15 @@ export type TranslationKeys =
   | 'about.tab.roadmap'
   | 'about.tab.terms'
   | 'about.tagline'
-  | 'about.telegram_button'
   | 'about.terms_text'
   | 'about.terms_title'
   | 'about.version'
 
   | 'changelog.empty'
+  | 'changelog.notes.changes_0153.about_maintainer'
+  | 'changelog.notes.changes_0153.fork_links'
+  | 'changelog.notes.changes_0153.title'
+  | 'changelog.notes.changes_0153.video_button'
   | 'changelog.notes.deps.ffmpeg'
   | 'changelog.notes.deps.katex'
   | 'changelog.notes.deps.npm'

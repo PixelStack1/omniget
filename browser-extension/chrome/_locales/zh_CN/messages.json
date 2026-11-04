@@ -286,5 +286,23 @@
   },
   "popup_manifest_gone": {
     "message": "该播放列表来自已重新加载的页面，请重新打开"
+  },
+  "overlay_button_label": {
+    "message": "使用 OmniGet 下载"
+  },
+  "overlay_no_media": {
+    "message": "尚未检测到视频——请先播放，然后重试"
+  },
+  "options_overlay_label": {
+    "message": "在视频上显示下载按钮"
+  },
+  "options_overlay_hint": {
+    "message": "鼠标悬停在视频上时，在其右上角显示一个小的 OmniGet 按钮。"
+  },
+  "options_overlay_on": {
+    "message": "已启用视频上的下载按钮。"
+  },
+  "options_overlay_off": {
+    "message": "已停用视频上的下载按钮。"
   }
 }

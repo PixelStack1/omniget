@@ -286,5 +286,23 @@
   },
   "popup_manifest_gone": {
     "message": "Essa playlist foi achada numa página que já recarregou — abra de novo"
+  },
+  "overlay_button_label": {
+    "message": "Baixar com o OmniGet"
+  },
+  "overlay_no_media": {
+    "message": "Nenhum vídeo detectado ainda — dê play e tente de novo"
+  },
+  "options_overlay_label": {
+    "message": "Mostrar botão de download nos vídeos"
+  },
+  "options_overlay_hint": {
+    "message": "Adiciona um pequeno botão do OmniGet no canto superior direito do vídeo quando você passa o mouse sobre ele."
+  },
+  "options_overlay_on": {
+    "message": "Botão de download nos vídeos ativado."
+  },
+  "options_overlay_off": {
+    "message": "Botão de download nos vídeos desativado."
   }
 }

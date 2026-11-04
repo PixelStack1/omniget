@@ -74,6 +74,14 @@
             </span>
           </label>
 
+          <label class="field">
+            <span class="label">
+              <input id="video-overlay" type="checkbox" checked />
+              <span id="video-overlay-label">Show download button on videos</span>
+            </span>
+            <span class="hint" id="video-overlay-hint">Adds a small OmniGet button to the top-right corner of a video while you hover over it.</span>
+          </label>
+
           <div class="actions">
             <button id="pair-now" type="button" class="button primary">Pair now</button>
             <button id="save" type="submit" class="button">Save</button>
@@ -186,13 +194,14 @@
           <summary>Don't have OmniGet installed yet?</summary>
           <p>
             Install the desktop app from
-            <a href="https://github.com/OpenSelena/omniget/releases/latest" target="_blank" rel="noreferrer">
-              github.com/OpenSelena/omniget
+            <a href="https://github.com/PixelStack1/omniget/releases/latest" target="_blank" rel="noreferrer">
+              github.com/PixelStack1/omniget
             </a>, launch it once, then come back to this page.
           </p>
         </details>
       </div>
     </main>
+    <script src="../src/video-overlay-core.js"></script>
     <script type="module" src="options.js"></script>
   </body>
 </html>

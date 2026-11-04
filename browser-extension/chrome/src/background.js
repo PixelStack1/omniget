@@ -15,6 +15,10 @@ import { loadH264State, isH264Enabled, isBlock60, setH264 } from "./h264-toggle.
 import { registerContextMenu, getContextMenuId } from "./context-menu.js";
 import { openOmnigetScheme } from "./send-via-scheme.js";
 import { isSyntheticManifestUrl } from "./synthetic-manifest.js";
+import { buildSendMessage } from "./media-pick.js";
+import { resolveOverlayCapture } from "./overlay-capture.js";
+import { syncVideoOverlayRegistration } from "./video-overlay-register.js";
+import { loadOpenAppState, isOpenAppEnabled } from "./open-app-toggle.js";
 import {
   sendViaBridge,
   sendCookiesViaBridge,
@@ -86,7 +90,7 @@ if (chrome.storage?.onChanged) {
   });
 }
 
-const INSTALL_URL = "https://github.com/OpenSelena/omniget/releases/latest";
+const INSTALL_URL = "https://github.com/PixelStack1/omniget/releases/latest";
 const PROTOCOL_VERSION = 1;
 
 function getIconPath(iconSet) {
@@ -125,7 +129,23 @@ registerSnifferListeners(onMediaDetected);
 loadSnifferState().catch(() => {});
 loadDeepSearchState().catch(() => {});
 loadH264State().catch(() => {});
-restoreMedia().catch(() => {});
+// Kept so a send that wakes the service worker can wait for the sniffer's
+// persisted captures instead of answering "nothing found" during boot.
+const mediaRestored = restoreMedia().catch(() => {});
+
+// The on-video download button follows whatever host access the extension
+// holds right now, so it is re-registered whenever that changes.
+syncVideoOverlayRegistration().catch(() => {});
+if (chrome.permissions?.onAdded) {
+  chrome.permissions.onAdded.addListener(() => {
+    syncVideoOverlayRegistration().catch(() => {});
+  });
+}
+if (chrome.permissions?.onRemoved) {
+  chrome.permissions.onRemoved.addListener(() => {
+    syncVideoOverlayRegistration().catch(() => {});
+  });
+}
 
 chrome.runtime.onInstalled.addListener(async (details) => {
   registerContextMenu();
@@ -236,10 +256,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
       const pageUrl = tabs[0]?.url;
       if (!tabId) { sendResponse({ media: [], snifferEnabled: isSnifferEnabled() }); return; }
 
-      const media = pageUrl
-        ? getDetectedMediaForUrl(pageUrl)
-        : getDetectedMedia(tabId);
-      const list = Array.from(media.values()).sort((a, b) => b.detectedAt - a.detectedAt);
+      const list = listMediaForTab(tabId, pageUrl);
 
       const pageDetected = detectSupportedMediaUrl(pageUrl);
 
@@ -277,6 +294,16 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 
   if (msg.type === "sendToOmniGet") {
     handleSendToApp(msg).then(sendResponse);
+    return true;
+  }
+
+  // The on-video button. Only our own content scripts may ask, and the tab,
+  // page and frame come from the sender, never from the message.
+  if (msg.type === "overlaySendToOmniGet") {
+    if (sender?.id !== chrome.runtime.id || !sender?.tab) return false;
+    handleOverlaySend(msg, sender)
+      .then(sendResponse)
+      .catch(() => sendResponse({ ok: false }));
     return true;
   }
 
@@ -341,6 +368,41 @@ async function fetchManifestText(tabId, frameId, url) {
   } catch {
     return null;
   }
+}
+
+function listMediaForTab(tabId, pageUrl) {
+  const media = pageUrl
+    ? getDetectedMediaForUrl(pageUrl)
+    : getDetectedMedia(tabId);
+  return Array.from(media.values()).sort((a, b) => b.detectedAt - a.detectedAt);
+}
+
+// Same decision and same payload as the popup's primary button (see
+// overlay-capture.js), then the same send path as every other entry point.
+async function handleOverlaySend(msg, sender) {
+  const tab = sender.tab;
+  if (!tab?.url) return { ok: false, reason: "no_tab" };
+  await mediaRestored;
+  const plan = resolveOverlayCapture({
+    pageUrl: tab.url,
+    frameUrl: typeof sender.url === "string" ? sender.url : tab.url,
+    videoSrc: typeof msg.videoSrc === "string" ? msg.videoSrc : "",
+    media: typeof tab.id === "number" ? listMediaForTab(tab.id, tab.url) : [],
+  });
+  if (!plan) return { ok: false, reason: "no_media" };
+
+  try { await loadOpenAppState(); } catch {}
+  const sendMsg = buildSendMessage(plan.url, plan.platform, plan.entry, {
+    title: tab.title || "",
+    thumbnail: tab.favIconUrl || "",
+    referer: tab.url,
+    openApp: isOpenAppEnabled(),
+  });
+  const result = await handleSendToApp(sendMsg);
+  if (result?.ok && typeof tab.id === "number") {
+    actionFeedback.showSuccessBadge(tab.id);
+  }
+  return { ok: Boolean(result?.ok), reason: result?.reason ?? null, source: plan.source };
 }
 
 function onMediaDetected(tabId, _entry) {

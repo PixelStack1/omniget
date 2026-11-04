@@ -20,7 +20,7 @@ Welcome to OmniGet. This file serves as the definitive reference and operating m
 
 > [!IMPORTANT]
 > **NEVER skip writing the release notes, updating the landing page, or updating the documentation when cutting or preparing a release.**
-> The in-app changelog modal (`src/lib/stores/changelog-store.svelte.ts`) fetches the GitHub release body directly from `https://api.github.com/repos/OpenSelena/omniget/releases/tags/v<VERSION>`. Leaving release notes blank breaks the in-app user experience.
+> The in-app changelog modal (`src/lib/stores/changelog-store.svelte.ts`) fetches the GitHub release body directly from `https://api.github.com/repos/PixelStack1/omniget/releases/tags/v<VERSION>`. Leaving release notes blank breaks the in-app user experience.
 
 ### Standard Operating Procedure for Every Release:
 

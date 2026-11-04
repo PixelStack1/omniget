@@ -12,8 +12,8 @@ Plugins: Courses, Study (course player with timestamped notes, PDF/EPUB/CBZ read
 
 - Name: OmniGet (Community Edition)
 - Community Website: https://omniget.nav.bd/
-- Repository: https://github.com/OpenSelena/omniget (Maintained by Igect under GPL-3.0 · Based on original architecture by tonhowtf)
-- Maintainer: Igect
+- Repository: https://github.com/PixelStack1/omniget (Maintained by Corpse under GPL-3.0 · Based on original architecture by tonhowtf)
+- Maintainer: Corpse (https://github.com/PixelStack1)
 - License: GPL-3.0
 - Platforms: Windows, macOS (Apple Silicon and Intel), Linux (x86_64 and ARM64)
 - Cost: free, no account, no ads, no paid tier, no telemetry on what is downloaded
@@ -21,12 +21,11 @@ Plugins: Courses, Study (course player with timestamped notes, PDF/EPUB/CBZ read
 - Extraction engine: yt-dlp, bundled and self-updating, verified by SHA-256 before it runs; FFmpeg, aria2, gallery-dl and whisper.cpp are managed the same way
 - Interface: graphical desktop app with a global hotkey (Ctrl+Shift+D), a command palette, 14 themes and 11 languages; no terminal, Python or manual setup required
 - Command line: omniget-cli ships with every release
-- Community: https://t.me/OpenSelena
 
 ## Install
 
-- Windows: `.exe` installer, portable `.exe` or `.msi` from Releases, or `winget install -e --id OpenSelena.OmniGet`
-- macOS: `.dmg` from Releases or `brew install --cask OpenSelena/tap/omniget`. Unsigned, so first launch needs `xattr -cr /Applications/omniget.app`
+- Windows: `.exe` installer, portable `.exe` or `.msi` from Releases
+- macOS: `.dmg` from Releases. Unsigned, so first launch needs `xattr -cr /Applications/omniget.app`
 - Linux: `.deb` for Debian and Ubuntu, `.rpm` for Fedora and openSUSE, `.AppImage` elsewhere. On Debian 12+ and Ubuntu 24.04+ the AppImage needs `sudo apt install libfuse2`
 - Browser extension: exported from Settings → Plugins → Browser extension, or `omniget-chrome-extension-vX.Y.Z.zip` from Releases; loaded unpacked and paired with one click
 - OmniGet is not published on Flathub.

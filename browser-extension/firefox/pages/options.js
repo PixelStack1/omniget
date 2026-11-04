@@ -237,6 +237,9 @@ if (typeof document !== "undefined") {
   const endpointHint = document.getElementById("endpoint-hint");
   const advancedDetails = document.getElementById("advanced");
   const autoCaptureCookiesInput = document.getElementById("auto-capture-cookies");
+  const videoOverlayInput = document.getElementById("video-overlay");
+
+  const tr = (key, fallback) => chrome.i18n?.getMessage?.(key) || fallback;
 
   const FALLBACK_ENDPOINT = "http://127.0.0.1:47720";
 
@@ -393,6 +396,42 @@ if (typeof document !== "undefined") {
           : "Automatic cookie sync disabled.",
         "ok"
       );
+    });
+  }
+
+  // --- On-video download button --------------------------------------------
+  // Stored as a plain flag the content script watches, so flipping it shows or
+  // hides the button on every open tab without a reload. The key and its
+  // default (on) come from src/video-overlay-core.js, loaded by options.html.
+  const overlayCore = globalThis.OmniGetVideoOverlay;
+  if (videoOverlayInput && overlayCore) {
+    const overlayLabel = document.getElementById("video-overlay-label");
+    const overlayHint = document.getElementById("video-overlay-hint");
+    if (overlayLabel) overlayLabel.textContent = tr("options_overlay_label", overlayLabel.textContent);
+    if (overlayHint) overlayHint.textContent = tr("options_overlay_hint", overlayHint.textContent);
+
+    videoOverlayInput.checked = overlayCore.DEFAULT_ENABLED;
+    chrome.storage.local
+      .get(overlayCore.STORAGE_KEY)
+      .then((stored) => {
+        videoOverlayInput.checked = overlayCore.isOverlayEnabled(stored?.[overlayCore.STORAGE_KEY]);
+      })
+      .catch(() => {});
+
+    videoOverlayInput.addEventListener("change", async () => {
+      const enabled = videoOverlayInput.checked;
+      await chrome.storage.local.set({ [overlayCore.STORAGE_KEY]: enabled });
+      setStatus(
+        enabled
+          ? tr("options_overlay_on", "Download button on videos enabled.")
+          : tr("options_overlay_off", "Download button on videos disabled."),
+        "ok"
+      );
+    });
+
+    chrome.storage.onChanged?.addListener((changes, area) => {
+      if (area !== "local" || !(overlayCore.STORAGE_KEY in changes)) return;
+      videoOverlayInput.checked = overlayCore.isOverlayEnabled(changes[overlayCore.STORAGE_KEY].newValue);
     });
   }
 

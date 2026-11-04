@@ -643,13 +643,13 @@ export function runTier1Tests() {
   // 5.8 Root index.html Live GitHub Star Counter Badge
   {
     const hasGhBadge = /id="ghStarCount"/.test(rootContent) &&
-                       /href="https:\/\/github\.com\/OpenSelena\/omniget"/.test(rootContent) &&
-                       /fetch\(['"]https:\/\/api\.github\.com\/repos\/OpenSelena\/omniget['"]\)/.test(rootContent);
+                       /href="https:\/\/github\.com\/PixelStack1\/omniget"/.test(rootContent) &&
+                       /fetch\(['"]https:\/\/api\.github\.com\/repos\/PixelStack1\/omniget['"]\)/.test(rootContent);
     record(
       'Tier 1: Root index.html Live GitHub Star Counter Badge',
       hasGhBadge,
       hasGhBadge ? 'Live GitHub star count badge rendered with live API updater' : 'GitHub star count badge missing or lacking API fetch updater',
-      hasGhBadge ? null : 'Expected #ghStarCount inside OpenSelena/omniget link with fetch updater'
+      hasGhBadge ? null : 'Expected #ghStarCount inside PixelStack1/omniget link with fetch updater'
     );
   }
 

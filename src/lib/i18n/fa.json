@@ -4323,7 +4323,7 @@
       "silence_done": "{{saved}} سکوت پیدا شد — پخش می‌تواند از آن رد شود",
       "portable_label": "حالت قابل‌حمل",
       "portable_active": "حالت قابل‌حمل فعال است. داده‌های OmniGet در {{dir}} ذخیره می‌شوند.",
-      "portable_macos_notice": "در macOS، WebView همچنان داده‌های نشست را در ‎~/Library نگه می‌دارد و حالت قابل‌حمل نمی‌تواند آن را جابه‌جا کند. اینجا فقط داده‌های خود OmniGet قابل‌حمل است — github.com/OpenSelena/omniget/issues/227 را ببینید."
+      "portable_macos_notice": "در macOS، WebView همچنان داده‌های نشست را در ‎~/Library نگه می‌دارد و حالت قابل‌حمل نمی‌تواند آن را جابه‌جا کند. اینجا فقط داده‌های خود OmniGet قابل‌حمل است — github.com/PixelStack1/omniget/issues را ببینید."
     },
     "dependencies": {
       "title": "وابستگی‌ها",
@@ -4869,9 +4869,7 @@
     "roadmap_community_discord": "reach out on discord:",
     "roadmap_community_issue": "or open an issue on the repository:",
     "tagline": "Download anything, from anywhere.",
-    "credit": "نگهداری توسط Corpse",
-    "based_on": "بر پایه OmniGet از OpenSelena",
-    "telegram_button": "تلگرام OpenSelena"
+    "credit": "به دست Corpse ادامه یافته و به‌طور کامل بهبود یافته است"
   },
   "marketplace": {
     "title": "Marketplace",
@@ -4991,7 +4989,7 @@
         "file_actions": "عملیات فایل برای دانلودهای صوتی و تصویری.",
         "slideshow": "پست‌های عکس TikTok همراه با موسیقی یک ویدیوی اسلایدشو هم می‌سازند. می‌توانید این را در تنظیمات خاموش کنید.",
         "h265": "برای سازگاری بهتر، ویدیوی H.265 به‌طور پیش‌فرض انتخاب نمی‌شود.",
-        "publisher": "نسخه‌های ویندوز Corpse را به‌عنوان ناشر نشان می‌دهند. OmniGet بر پایهٔ کار OpenSelena و مشارکت‌کنندگانش ساخته شده است."
+        "publisher": "نسخه‌های ویندوز Corpse را به‌عنوان ناشر نشان می‌دهند."
       },
       "security": {
         "title": "امنیت",
@@ -5024,13 +5022,19 @@
       },
       "fixes_0151": {
         "title": "اصلاحات 0.15.1",
-        "maintainer": "صفحه درباره، نگهدارنده فورک (Corpse) را نشان می‌دهد و همچنان از OpenSelena نام می‌برد.",
+        "maintainer": "صفحه درباره، نگهدارنده فورک (Corpse) را نشان می‌دهد.",
         "fork_links": "دکمه‌های GitHub و یادداشت‌های انتشار به PixelStack1/omniget اشاره می‌کنند.",
         "translations": "صفحات درباره و فهرست دانلودها به همه زبان‌ها ترجمه شده‌اند."
       },
       "fixes_0152": {
         "title": "اصلاحات 0.15.2",
-        "appimage_ld_path": "در AppImage لینوکس، yt-dlp و FFmpeg سیستم دیگر با خطا مواجه نمی‌شوند: فرایندهای فرزند دیگر LD_LIBRARY_PATH مربوط به AppImage را به ارث نمی‌برند (OpenSelena/omniget#147)."
+        "appimage_ld_path": "در AppImage لینوکس، yt-dlp و FFmpeg سیستم دیگر با خطا مواجه نمی‌شوند: فرایندهای فرزند دیگر LD_LIBRARY_PATH مربوط به AppImage را به ارث نمی‌برند."
+      },
+      "changes_0153": {
+        "title": "تازه‌های نسخهٔ 0.15.3",
+        "video_button": "افزونهٔ مرورگر: با بردن نشانگر روی ویدیوها دکمهٔ «دانلود با OmniGet» نمایش داده می‌شود. می‌توانید آن را در تنظیمات افزونه خاموش کنید.",
+        "about_maintainer": "صفحهٔ درباره اکنون نام نگهدارنده، Corpse، را ذکر می‌کند.",
+        "fork_links": "پیوندهای برنامه، افزونه و مستندات اکنون به PixelStack1/omniget اشاره می‌کنند."
       }
     }
   },

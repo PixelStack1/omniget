@@ -69,11 +69,11 @@ test("sanitizeInstallUrl rejects malicious and foreign URLs and allows official 
   assert.equal(sanitizeInstallUrl(""), DEFAULT_INSTALL_URL);
   assert.equal(sanitizeInstallUrl("javascript:alert(1)"), DEFAULT_INSTALL_URL);
   assert.equal(sanitizeInstallUrl("data:text/html,evil"), DEFAULT_INSTALL_URL);
-  assert.equal(sanitizeInstallUrl("http://github.com/OpenSelena/omniget"), DEFAULT_INSTALL_URL);
+  assert.equal(sanitizeInstallUrl("http://github.com/PixelStack1/omniget"), DEFAULT_INSTALL_URL);
   assert.equal(sanitizeInstallUrl("https://evil.com/fake-update"), DEFAULT_INSTALL_URL);
   assert.equal(
-    sanitizeInstallUrl("https://github.com/OpenSelena/omniget/releases/tag/v0.12.0"),
-    "https://github.com/OpenSelena/omniget/releases/tag/v0.12.0"
+    sanitizeInstallUrl("https://github.com/PixelStack1/omniget/releases/tag/v0.12.0"),
+    "https://github.com/PixelStack1/omniget/releases/tag/v0.12.0"
   );
   assert.equal(
     sanitizeInstallUrl("https://omniget.org/download"),

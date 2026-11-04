@@ -5,7 +5,12 @@ import { readFile, readdir } from "node:fs/promises";
 const localesDir = new URL("../_locales/", import.meta.url);
 // Every file that reads a message by key. Keys are always string literals, so
 // they can be found without running the page.
-const SOURCES = ["../popup/popup.js", "../pages/options.js", "../pages/error-content.js"];
+const SOURCES = [
+  "../popup/popup.js",
+  "../pages/options.js",
+  "../pages/error-content.js",
+  "../src/video-overlay.js",
+];
 
 async function readLocale(name) {
   return JSON.parse(await readFile(new URL(`${name}/messages.json`, localesDir), "utf8"));

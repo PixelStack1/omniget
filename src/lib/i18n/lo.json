@@ -4323,7 +4323,7 @@
       "silence_done": "ພົບຊ່ວງງຽບ {{saved}} — ການຫຼິ້ນສາມາດຂ້າມໄດ້",
       "portable_label": "ໂໝດພົກພາ",
       "portable_active": "ໂໝດພົກພາເປີດໃຊ້ຢູ່. ຂໍ້ມູນຂອງ OmniGet ຖືກເກັບໄວ້ໃນ {{dir}}.",
-      "portable_macos_notice": "ໃນ macOS, WebView ຍັງເກັບຂໍ້ມູນເຊສຊັນໄວ້ພາຍໃຕ້ ~/Library ແລະ ໂໝດພົກພາບໍ່ສາມາດປ່ຽນເສັ້ນທາງໄດ້. ມີແຕ່ຂໍ້ມູນຂອງ OmniGet ເອງທີ່ພົກພາໄດ້ — ເບິ່ງ github.com/OpenSelena/omniget/issues/227."
+      "portable_macos_notice": "ໃນ macOS, WebView ຍັງເກັບຂໍ້ມູນເຊສຊັນໄວ້ພາຍໃຕ້ ~/Library ແລະ ໂໝດພົກພາບໍ່ສາມາດປ່ຽນເສັ້ນທາງໄດ້. ມີແຕ່ຂໍ້ມູນຂອງ OmniGet ເອງທີ່ພົກພາໄດ້ — ເບິ່ງ github.com/PixelStack1/omniget/issues."
     },
     "dependencies": {
       "title": "ສ່ວນປະກອບທີ່ຈຳເປັນ",
@@ -4869,9 +4869,7 @@
     "roadmap_community_discord": "ຕິດຕໍ່ຫາພວກເຮົາໃນ discord:",
     "roadmap_community_issue": "ຫຼື ເປີດ issue ໃນ repository:",
     "tagline": "ດາວໂຫຼດທຸກຢ່າງ, ຈາກທຸກບ່ອນ.",
-    "credit": "ດູແລໂດຍ Corpse",
-    "based_on": "ອີງໃສ່ OmniGet ຂອງ OpenSelena",
-    "telegram_button": "Telegram ຂອງ OpenSelena"
+    "credit": "ຮັບຊ່ວງ ແລະ ປັບປຸງທັງໝົດໂດຍ Corpse"
   },
   "marketplace": {
     "title": "ຕະຫຼາດ",
@@ -4991,7 +4989,7 @@
         "file_actions": "ການດຳເນີນການກັບໄຟລ໌ສຳລັບການດາວໂຫຼດສຽງ ແລະ ຮູບພາບ.",
         "slideshow": "ໂພສຮູບ TikTok ທີ່ມີເພງຈະໄດ້ວິດີໂອສະໄລດ໌ໂຊນຳ. ທ່ານສາມາດປິດໄດ້ໃນການຕັ້ງຄ່າ.",
         "h265": "ວິດີໂອ H.265 ຈະຖືກຫຼີກລ່ຽງເປັນຄ່າເລີ່ມຕົ້ນ ເພື່ອຄວາມເຂົ້າກັນໄດ້ທີ່ດີກວ່າ.",
-        "publisher": "ເວີຊັນ Windows ສະແດງ Corpse ເປັນຜູ້ເຜີຍແຜ່. OmniGet ອີງໃສ່ຜົນງານຂອງ OpenSelena ແລະ ຜູ້ຮ່ວມພັດທະນາ."
+        "publisher": "ເວີຊັນ Windows ສະແດງ Corpse ເປັນຜູ້ເຜີຍແຜ່."
       },
       "security": {
         "title": "ຄວາມປອດໄພ",
@@ -5024,13 +5022,19 @@
       },
       "fixes_0151": {
         "title": "ການແກ້ໄຂ 0.15.1",
-        "maintainer": "ໜ້າກ່ຽວກັບສະແດງຜູ້ດູແລ fork (Corpse) ແລະ ຍັງໃຫ້ເຄຣດິດ OpenSelena.",
+        "maintainer": "ໜ້າກ່ຽວກັບສະແດງຜູ້ດູແລ fork (Corpse).",
         "fork_links": "ປຸ່ມ GitHub ແລະ ບັນທຶກເວີຊັນຊີ້ໄປທີ່ PixelStack1/omniget.",
         "translations": "ໜ້າກ່ຽວກັບ ແລະ ລາຍການດາວໂຫຼດຖືກແປເປັນທຸກພາສາ."
       },
       "fixes_0152": {
         "title": "ການແກ້ໄຂ 0.15.2",
-        "appimage_ld_path": "ໃນ AppImage ສຳລັບ Linux, yt-dlp ແລະ FFmpeg ຂອງລະບົບບໍ່ລົ້ມເຫຼວອີກຕໍ່ໄປ: ໂປຣເຊສລູກບໍ່ສືບທອດ LD_LIBRARY_PATH ຂອງ AppImage ອີກແລ້ວ (OpenSelena/omniget#147)."
+        "appimage_ld_path": "ໃນ AppImage ສຳລັບ Linux, yt-dlp ແລະ FFmpeg ຂອງລະບົບບໍ່ລົ້ມເຫຼວອີກຕໍ່ໄປ: ໂປຣເຊສລູກບໍ່ສືບທອດ LD_LIBRARY_PATH ຂອງ AppImage ອີກແລ້ວ."
+      },
+      "changes_0153": {
+        "title": "ມີຫຍັງໃໝ່ໃນ 0.15.3",
+        "video_button": "ສ່ວນຂະຫຍາຍບຣາວເຊີ: ປຸ່ມ “ດາວໂຫຼດດ້ວຍ OmniGet” ຈະປາກົດຢູ່ເທິງວິດີໂອເມື່ອເລື່ອນເມົ້າໄປວາງ. ທ່ານສາມາດປິດມັນໄດ້ໃນຕົວເລືອກຂອງສ່ວນຂະຫຍາຍ.",
+        "about_maintainer": "ໜ້າກ່ຽວກັບຕອນນີ້ໃຫ້ເຄຣດິດຜູ້ດູແລ, Corpse.",
+        "fork_links": "ລິ້ງໃນແອັບ, ສ່ວນຂະຫຍາຍ ແລະ ເອກະສານ ຕອນນີ້ຊີ້ໄປຫາ PixelStack1/omniget."
       }
     }
   },

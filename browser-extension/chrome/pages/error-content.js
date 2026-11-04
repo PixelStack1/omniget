@@ -71,7 +71,7 @@ export function resolveErrorPageContent({
   };
 }
 
-export const DEFAULT_INSTALL_URL = "https://github.com/OpenSelena/omniget/releases/latest";
+export const DEFAULT_INSTALL_URL = "https://github.com/PixelStack1/omniget/releases/latest";
 
 export function sanitizeInstallUrl(candidate) {
   if (!candidate || typeof candidate !== "string") {

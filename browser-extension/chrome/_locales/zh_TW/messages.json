@@ -286,5 +286,23 @@
   },
   "popup_manifest_gone": {
     "message": "該播放清單來自已重新載入的頁面，請重新開啟"
+  },
+  "overlay_button_label": {
+    "message": "使用 OmniGet 下載"
+  },
+  "overlay_no_media": {
+    "message": "尚未偵測到影片——請先播放，然後再試一次"
+  },
+  "options_overlay_label": {
+    "message": "在影片上顯示下載按鈕"
+  },
+  "options_overlay_hint": {
+    "message": "滑鼠移到影片上時，在其右上角顯示一個小型 OmniGet 按鈕。"
+  },
+  "options_overlay_on": {
+    "message": "已啟用影片上的下載按鈕。"
+  },
+  "options_overlay_off": {
+    "message": "已停用影片上的下載按鈕。"
   }
 }

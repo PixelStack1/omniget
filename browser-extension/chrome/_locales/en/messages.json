@@ -286,5 +286,23 @@
   },
   "popup_manifest_gone": {
     "message": "That playlist was found in a page that has since reloaded — open it again"
+  },
+  "overlay_button_label": {
+    "message": "Download with OmniGet"
+  },
+  "overlay_no_media": {
+    "message": "No video found yet — play it, then try again"
+  },
+  "options_overlay_label": {
+    "message": "Show download button on videos"
+  },
+  "options_overlay_hint": {
+    "message": "Adds a small OmniGet button to the top-right corner of a video while you hover over it."
+  },
+  "options_overlay_on": {
+    "message": "Download button on videos enabled."
+  },
+  "options_overlay_off": {
+    "message": "Download button on videos disabled."
   }
 }

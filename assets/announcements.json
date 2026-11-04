@@ -1,13 +1,13 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "id": "announcement-openselena-telegram-v2",
+  "id": "announcement-pixelstack1-releases-v1",
   "active": false,
-  "title": "Open Selena Telegram",
-  "thumbnail": "https://raw.githubusercontent.com/OpenSelena/omniget/main/assets/announcement-poster.png",
-  "body": "Join the official Telegram channel of OpenSelena, where we share beta updates of OmniGet, new feature announcements, bug fixes, and the latest AI news and leaks.",
+  "title": "OmniGet releases",
+  "thumbnail": "https://raw.githubusercontent.com/PixelStack1/omniget/main/src-tauri/icons/128x128@2x.png",
+  "body": "New OmniGet versions, release notes and downloads are published on GitHub.",
   "cta": {
-    "label": "Join Telegram Channel",
-    "url": "https://t.me/openselena"
+    "label": "View releases",
+    "url": "https://github.com/PixelStack1/omniget/releases"
   },
   "expires_at": null
 }

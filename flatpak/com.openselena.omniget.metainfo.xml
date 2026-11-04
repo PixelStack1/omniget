@@ -23,9 +23,9 @@
       <li>Queue management with concurrent downloads</li>
     </ul>
   </description>
-  <url type="homepage">https://github.com/OpenSelena/omniget</url>
-  <url type="bugtracker">https://github.com/OpenSelena/omniget/issues</url>
-  <url type="vcs-browser">https://github.com/OpenSelena/omniget</url>
+  <url type="homepage">https://github.com/PixelStack1/omniget</url>
+  <url type="bugtracker">https://github.com/PixelStack1/omniget/issues</url>
+  <url type="vcs-browser">https://github.com/PixelStack1/omniget</url>
   <launchable type="desktop-id">com.openselena.omniget.desktop</launchable>
   <provides>
     <binary>omniget</binary>
@@ -33,7 +33,7 @@
   <screenshots>
     <screenshot type="default">
       <caption>Main download interface</caption>
-      <image>https://raw.githubusercontent.com/OpenSelena/omniget/main/flatpak/screenshots/main.png</image>
+      <image>https://raw.githubusercontent.com/PixelStack1/omniget/main/flatpak/screenshots/main.png</image>
     </screenshot>
   </screenshots>
   <branding>

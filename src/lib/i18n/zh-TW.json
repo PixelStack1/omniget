@@ -4323,7 +4323,7 @@
       "silence_done": "發現 {{saved}} 的靜音 —— 播放時可以略過",
       "portable_label": "便攜模式",
       "portable_active": "便攜模式已啟用。OmniGet 的資料儲存在 {{dir}}。",
-      "portable_macos_notice": "在 macOS 上，WebView 仍會把會話資料存放在 ~/Library 中，便攜模式無法轉移它。這裡只有 OmniGet 自身的資料是便攜的，詳見 github.com/OpenSelena/omniget/issues/227。"
+      "portable_macos_notice": "在 macOS 上，WebView 仍會把會話資料存放在 ~/Library 中，便攜模式無法轉移它。這裡只有 OmniGet 自身的資料是便攜的，詳見 github.com/PixelStack1/omniget/issues。"
     },
     "dependencies": {
       "title": "相依元件",
@@ -4869,9 +4869,7 @@
     "roadmap_community_discord": "可透過 Discord 聯絡：",
     "roadmap_community_issue": "或在專案儲存庫建立 Issue：",
     "tagline": "隨時隨地，下載一切。",
-    "credit": "由 Corpse 維護",
-    "based_on": "基於 OpenSelena 的 OmniGet",
-    "telegram_button": "OpenSelena 的 Telegram"
+    "credit": "由 Corpse 接手並全面改進"
   },
   "marketplace": {
     "title": "插件市场",
@@ -4991,7 +4989,7 @@
         "file_actions": "音訊和圖片下載也支援檔案操作。",
         "slideshow": "帶有音樂的 TikTok 相片貼文也會產生投影片影片。可以在設定中關閉。",
         "h265": "預設避免 H.265 影片，以獲得更好的相容性。",
-        "publisher": "Windows 版本顯示 Corpse 為發行者。OmniGet 以 OpenSelena 及其貢獻者的成果為基礎。"
+        "publisher": "Windows 版本顯示 Corpse 為發行者。"
       },
       "security": {
         "title": "安全性",
@@ -5024,13 +5022,19 @@
       },
       "fixes_0151": {
         "title": "0.15.1 修正",
-        "maintainer": "關於頁面顯示分支維護者 (Corpse)，並保留 OpenSelena 的署名。",
+        "maintainer": "關於頁面顯示分支維護者 (Corpse)。",
         "fork_links": "GitHub 按鈕與發行說明指向 PixelStack1/omniget。",
         "translations": "關於頁面與下載清單已翻譯為所有語言。"
       },
       "fixes_0152": {
         "title": "0.15.2 修正",
-        "appimage_ld_path": "在 Linux AppImage 中，yt-dlp 與系統 FFmpeg 不再失敗：子行程不再繼承 AppImage 的 LD_LIBRARY_PATH (OpenSelena/omniget#147)。"
+        "appimage_ld_path": "在 Linux AppImage 中，yt-dlp 與系統 FFmpeg 不再失敗：子行程不再繼承 AppImage 的 LD_LIBRARY_PATH。"
+      },
+      "changes_0153": {
+        "title": "0.15.3 新功能",
+        "video_button": "瀏覽器擴充功能：將滑鼠移到影片上時會出現「使用 OmniGet 下載」按鈕，可在擴充功能選項中關閉。",
+        "about_maintainer": "關於頁面現在註明維護者 Corpse。",
+        "fork_links": "應用程式、擴充功能和文件中的連結現在指向 PixelStack1/omniget。"
       }
     }
   },

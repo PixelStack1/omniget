@@ -1,4 +1,11 @@
-# OmniGet v0.15.2 – draft release notes (based on v0.15.1)
+# OmniGet v0.15.3 – draft release notes (based on v0.15.2)
+
+## What's new
+- Browser extension: a "Download with OmniGet" button appears on videos when you hover them. You can turn it off in the extension options.
+- The About page now credits the maintainer, Corpse.
+- Links in the app, the extension and the docs now point to PixelStack1/omniget.
+
+## OmniGet v0.15.2 – draft release notes (based on v0.15.1)
 
 ## Fixes
 - Fix: on Linux AppImage, yt-dlp and system FFmpeg failed because child processes inherited the AppImage's LD_LIBRARY_PATH (OpenSelena/omniget#147).
