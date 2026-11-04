@@ -3677,7 +3677,7 @@
     },
     "empty_hint": "Paste a link on the home screen and it shows up here with speed, progress and a folder button.",
     "empty_cta": "Paste a link",
-    "speed_unlimited": "No speed limit",
+    "speed_unlimited": "بدون محدودیت سرعت",
     "error_details": "Technical details",
     "view_queue": "Downloads",
     "view_history": "History",
@@ -4816,7 +4816,7 @@
   },
   "about": {
     "tab": {
-      "overview": "Overview",
+      "overview": "نمای کلی",
       "terms": "terms",
       "project": "project",
       "roadmap": "roadmap",
@@ -4832,12 +4832,12 @@
       "copy_failed": "Could not copy to clipboard"
     },
     "debug_disabled_redirect": "Debug page is hidden. Enable it in Settings → Advanced → Diagnostics.",
-    "card_changelog_title": "What's new",
-    "card_changelog_desc": "Release notes for every version.",
-    "card_project_title": "The project",
-    "card_project_desc": "Roadmap, philosophy and how to contribute.",
-    "card_terms_title": "Terms & ethics",
-    "card_terms_desc": "What OmniGet expects from you, and what you can expect back.",
+    "card_changelog_title": "تازه‌ها",
+    "card_changelog_desc": "یادداشت‌های انتشار هر نسخه.",
+    "card_project_title": "پروژه",
+    "card_project_desc": "نقشه راه، فلسفه و نحوه مشارکت.",
+    "card_terms_title": "شرایط و اخلاق",
+    "card_terms_desc": "آنچه OmniGet از شما انتظار دارد و آنچه می‌توانید در عوض انتظار داشته باشید.",
     "description": "your media downloader. open source and free.",
     "terms_title": "terms of use",
     "terms_text": "OmniGet is provided as is and we make no guarantees. the app makes it easier to download content that's publicly available on the internet, but we take zero responsibility for what you download or what you do with it. by using OmniGet, you agree to that.",
@@ -4869,7 +4869,9 @@
     "roadmap_community_discord": "reach out on discord:",
     "roadmap_community_issue": "or open an issue on the repository:",
     "tagline": "Download anything, from anywhere.",
-    "credit": "Made with love by OpenSelena"
+    "credit": "نگهداری توسط Corpse",
+    "based_on": "بر پایه OmniGet از OpenSelena",
+    "telegram_button": "تلگرام OpenSelena"
   },
   "marketplace": {
     "title": "Marketplace",
@@ -5019,6 +5021,12 @@
         "toolchain": "رابط کاربری اکنون با SvelteKit 3، Vite 8، Vitest 5 و بررسی نوع TypeScript 7 ساخته می‌شود.",
         "katex": "KaTeX در همه جا به 0.18.10 ارتقا یافت.",
         "ffmpeg": "به‌روزرسانی‌های FFmpeg دیگر هنگام جایگزینی آخرین نسخه، خطای نادرست چکیده نشان نمی‌دهند."
+      },
+      "fixes_0151": {
+        "title": "اصلاحات 0.15.1",
+        "maintainer": "صفحه درباره، نگهدارنده فورک (Corpse) را نشان می‌دهد و همچنان از OpenSelena نام می‌برد.",
+        "fork_links": "دکمه‌های GitHub و یادداشت‌های انتشار به PixelStack1/omniget اشاره می‌کنند.",
+        "translations": "صفحات درباره و فهرست دانلودها به همه زبان‌ها ترجمه شده‌اند."
       }
     }
   },

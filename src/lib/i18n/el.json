@@ -3677,7 +3677,7 @@
     },
     "empty_hint": "Paste a link on the home screen and it shows up here with speed, progress and a folder button.",
     "empty_cta": "Paste a link",
-    "speed_unlimited": "No speed limit",
+    "speed_unlimited": "Χωρίς όριο ταχύτητας",
     "error_details": "Technical details",
     "view_queue": "Downloads",
     "view_history": "History",
@@ -4816,7 +4816,7 @@
   },
   "about": {
     "tab": {
-      "overview": "Overview",
+      "overview": "Επισκόπηση",
       "terms": "Όροι & Δεοντολογία",
       "project": "Σχέδιο",
       "roadmap": "Πλάνο",
@@ -4832,12 +4832,12 @@
       "copy_failed": "Αποτυχία αντιγραφής"
     },
     "debug_disabled_redirect": "Debug page is hidden. Enable it in Settings → Advanced → Diagnostics.",
-    "card_changelog_title": "What's new",
-    "card_changelog_desc": "Release notes for every version.",
-    "card_project_title": "The project",
-    "card_project_desc": "Roadmap, philosophy and how to contribute.",
-    "card_terms_title": "Terms & ethics",
-    "card_terms_desc": "What OmniGet expects from you, and what you can expect back.",
+    "card_changelog_title": "Τι νέο υπάρχει",
+    "card_changelog_desc": "Σημειώσεις για κάθε έκδοση.",
+    "card_project_title": "Το έργο",
+    "card_project_desc": "Πλάνο, φιλοσοφία και πώς να συμβάλετε.",
+    "card_terms_title": "Όροι και ηθική",
+    "card_terms_desc": "Τι περιμένει το OmniGet από εσάς και τι μπορείτε να περιμένετε.",
     "description": "το πρόγραμμα λήψης πολυμέσων σας. ανοιχτού κώδικα και δωρεάν.",
     "terms_title": "όροι χρήσης",
     "terms_text": "Το OmniGet παρέχεται όπως είναι και δεν παρέχουμε καμία εγγύηση. Η εφαρμογή διευκολύνει τη λήψη περιεχομένου που είναι δημόσια διαθέσιμο στο διαδίκτυο, αλλά δεν φέρουμε καμία ευθύνη για το τι κατεβάζετε ή τι κάνετε με αυτό. Χρησιμοποιώντας το OmniGet, συμφωνείτε με αυτό.",
@@ -4869,7 +4869,9 @@
     "roadmap_community_discord": "βρείτε μας στο discord:",
     "roadmap_community_issue": "ή ανοίξτε ένα θέμα (issue) στο αποθετήριο:",
     "tagline": "Κατεβάστε οτιδήποτε, από οπουδήποτε.",
-    "credit": "Φτιαγμένο με αγάπη από OpenSelena"
+    "credit": "Συντηρείται από τον Corpse",
+    "based_on": "Βασισμένο στο OmniGet της OpenSelena",
+    "telegram_button": "Telegram της OpenSelena"
   },
   "marketplace": {
     "title": "Marketplace",
@@ -5019,6 +5021,12 @@
         "toolchain": "Η διεπαφή μεταγλωττίζεται πλέον με SvelteKit 3, Vite 8, Vitest 5 και έλεγχο τύπων TypeScript 7.",
         "katex": "Το KaTeX αναβαθμίστηκε στο 0.18.10 παντού.",
         "ffmpeg": "Οι ενημερώσεις του FFmpeg δεν δείχνουν πια ψευδές σφάλμα hash όταν αντικαθίσταται η τελευταία έκδοση."
+      },
+      "fixes_0151": {
+        "title": "Διορθώσεις 0.15.1",
+        "maintainer": "Η σελίδα «Σχετικά» δείχνει τον συντηρητή του fork (Corpse) και πιστώνει την OpenSelena.",
+        "fork_links": "Τα κουμπιά GitHub και οι σημειώσεις έκδοσης δείχνουν στο PixelStack1/omniget.",
+        "translations": "Οι σελίδες «Σχετικά» και η λίστα λήψεων είναι μεταφρασμένες σε όλες τις γλώσσες."
       }
     }
   },

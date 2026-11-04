@@ -3677,7 +3677,7 @@
     },
     "empty_hint": "Paste a link on the home screen and it shows up here with speed, progress and a folder button.",
     "empty_cta": "Paste a link",
-    "speed_unlimited": "No speed limit",
+    "speed_unlimited": "无速度限制",
     "error_details": "Technical details",
     "view_queue": "Downloads",
     "view_history": "History",
@@ -4816,7 +4816,7 @@
   },
   "about": {
     "tab": {
-      "overview": "Overview",
+      "overview": "概览",
       "terms": "条款",
       "project": "项目",
       "roadmap": "路线图",
@@ -4832,12 +4832,12 @@
       "copy_failed": "无法复制到剪贴板"
     },
     "debug_disabled_redirect": "Debug page is hidden. Enable it in Settings → Advanced → Diagnostics.",
-    "card_changelog_title": "What's new",
-    "card_changelog_desc": "Release notes for every version.",
-    "card_project_title": "The project",
-    "card_project_desc": "Roadmap, philosophy and how to contribute.",
-    "card_terms_title": "Terms & ethics",
-    "card_terms_desc": "What OmniGet expects from you, and what you can expect back.",
+    "card_changelog_title": "新功能",
+    "card_changelog_desc": "每个版本的发行说明。",
+    "card_project_title": "项目",
+    "card_project_desc": "路线图、理念与贡献方式。",
+    "card_terms_title": "条款与伦理",
+    "card_terms_desc": "OmniGet 对你的期望，以及你能得到的回报。",
     "description": "你的媒体下载器。开源且免费。",
     "terms_title": "使用条款",
     "terms_text": "OmniGet 按原样提供，不作任何保证。本应用方便你下载互联网上公开可用的内容，但我们对你下载的内容及其用途不承担任何责任。使用 OmniGet 即表示你同意上述条款。",
@@ -4869,7 +4869,9 @@
     "roadmap_community_discord": "在 Discord 上联系我们：",
     "roadmap_community_issue": "或在代码仓库中提交 Issue：",
     "tagline": "随时随地，下载一切。",
-    "credit": "由 OpenSelena 用心打造"
+    "credit": "由 Corpse 维护",
+    "based_on": "基于 OpenSelena 的 OmniGet",
+    "telegram_button": "OpenSelena 的 Telegram"
   },
   "marketplace": {
     "title": "插件市场",
@@ -5019,6 +5021,12 @@
         "toolchain": "界面现在使用 SvelteKit 3、Vite 8、Vitest 5 和 TypeScript 7 类型检查构建。",
         "katex": "KaTeX 已全部升级到 0.18.10。",
         "ffmpeg": "FFmpeg 最新构建被替换时，更新不再报告错误的校验和错误。"
+      },
+      "fixes_0151": {
+        "title": "0.15.1 修复",
+        "maintainer": "关于页面显示分支维护者 (Corpse)，并保留 OpenSelena 的署名。",
+        "fork_links": "GitHub 按钮与发行说明指向 PixelStack1/omniget。",
+        "translations": "关于页面与下载列表已翻译为所有语言。"
       }
     }
   },

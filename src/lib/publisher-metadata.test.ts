@@ -46,6 +46,18 @@ describe("publisher metadata", () => {
   it("README, About and LICENSE keep the original credits", () => {
     expect(read("README.md")).toMatch(/OpenSelena/);
     expect(read("src/routes/about/+page.svelte")).toMatch(/@OpenSelena/);
+  });
+
+  it("the About page names the fork maintainer", () => {
+    const about = read("src/routes/about/+page.svelte");
+    expect(about).toMatch(/@PixelStack1/);
+    expect(about).toMatch(/github\.com\/PixelStack1\/omniget/);
+    expect(read("src/routes/about/project/+page.svelte")).toMatch(/PixelStack1\/omniget/);
+    for (const file of fs.readdirSync(path.join(root, "src/lib/i18n")).filter((f) => f.endsWith(".json"))) {
+      const about18n = JSON.parse(read(`src/lib/i18n/${file}`)).about;
+      expect(about18n.credit, file).toMatch(/Corpse/);
+      expect(about18n.based_on, file).toMatch(/OpenSelena/);
+    }
     expect(read("LICENSE")).toMatch(/GNU GENERAL PUBLIC LICENSE/);
   });
 });

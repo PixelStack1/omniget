@@ -3677,7 +3677,7 @@
     },
     "empty_hint": "Paste a link on the home screen and it shows up here with speed, progress and a folder button.",
     "empty_cta": "Paste a link",
-    "speed_unlimited": "No speed limit",
+    "speed_unlimited": "Sem limite de velocidade",
     "error_details": "Technical details",
     "view_queue": "Downloads",
     "view_history": "Histórico",
@@ -4816,11 +4816,11 @@
   },
   "about": {
     "tab": {
-      "overview": "Overview",
+      "overview": "Visão geral",
       "terms": "Termos e Ética",
       "project": "Projeto",
       "roadmap": "Roteiro",
-      "changelog": "Changelog",
+      "changelog": "Novidades",
       "debug": "Info de Depuração"
     },
     "debug": {
@@ -4832,12 +4832,12 @@
       "copy_failed": "Não foi possível copiar"
     },
     "debug_disabled_redirect": "Página de debug está oculta. Ative em Configurações → Avançado → Diagnósticos.",
-    "card_changelog_title": "What's new",
-    "card_changelog_desc": "Release notes for every version.",
-    "card_project_title": "The project",
-    "card_project_desc": "Roadmap, philosophy and how to contribute.",
-    "card_terms_title": "Terms & ethics",
-    "card_terms_desc": "What OmniGet expects from you, and what you can expect back.",
+    "card_changelog_title": "Novidades",
+    "card_changelog_desc": "Notas de cada versão.",
+    "card_project_title": "O projeto",
+    "card_project_desc": "Roadmap, filosofia e como contribuir.",
+    "card_terms_title": "Termos e ética",
+    "card_terms_desc": "O que o OmniGet espera de você e o que você pode esperar em troca.",
     "description": "o seu downloader de mídia. código aberto e gratuito.",
     "terms_title": "termos de uso",
     "terms_text": "OmniGet é fornecido como está e sem garantias. o app facilita o download de conteúdo disponível publicamente na internet, mas não nos responsabilizamos pelo que você baixa ou pelo que faz com o conteúdo. ao usar o OmniGet, você concorda com isso.",
@@ -4869,7 +4869,9 @@
     "roadmap_community_discord": "me chama no discord:",
     "roadmap_community_issue": "ou abra uma issue no repositório:",
     "tagline": "Baixe qualquer coisa, de qualquer lugar.",
-    "credit": "Feito com amor por OpenSelena"
+    "credit": "Mantido por Corpse",
+    "based_on": "Baseado no OmniGet de OpenSelena",
+    "telegram_button": "Telegram de OpenSelena"
   },
   "marketplace": {
     "title": "Marketplace",
@@ -5019,6 +5021,12 @@
         "toolchain": "A interface agora é compilada com SvelteKit 3, Vite 8, Vitest 5 e checagem de tipos do TypeScript 7.",
         "katex": "KaTeX atualizado para 0.18.10 em todo lugar.",
         "ffmpeg": "As atualizações do FFmpeg não mostram mais um falso erro de hash quando a versão mais recente é substituída."
+      },
+      "fixes_0151": {
+        "title": "Correções da 0.15.1",
+        "maintainer": "A página Sobre mostra o mantenedor do fork (Corpse) e continua creditando OpenSelena.",
+        "fork_links": "Os botões do GitHub e as notas de versão apontam para PixelStack1/omniget.",
+        "translations": "As páginas Sobre e a lista de downloads estão traduzidas em todos os idiomas."
       }
     }
   },

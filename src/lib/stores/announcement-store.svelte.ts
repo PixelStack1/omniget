@@ -18,7 +18,7 @@ export interface Announcement {
 
 export const ANNOUNCEMENT_STORAGE_KEY = "omniget_seen_announcements";
 export const DEFAULT_ANNOUNCEMENT_URL =
-  "https://raw.githubusercontent.com/OpenSelena/omniget/main/assets/announcements.json";
+  "https://raw.githubusercontent.com/PixelStack1/omniget/main/assets/announcements.json";
 
 let isOpen = $state(false);
 let activeAnnouncement = $state<Announcement | null>(null);

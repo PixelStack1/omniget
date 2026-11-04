@@ -20,6 +20,10 @@ const section = (id: string, items: string[]): ReleaseNotesSection => ({
 
 export const RELEASE_NOTES: ReleaseNotes[] = [
   {
+    version: "0.15.1",
+    sections: [section("fixes_0151", ["maintainer", "fork_links", "translations"])],
+  },
+  {
     version: "0.15.0",
     sections: [
       section("features", [

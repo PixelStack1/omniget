@@ -168,7 +168,7 @@
       <div class="body">
         <p>A extensão foi extraída para:</p>
         <code class="path">{installModal.path}</code>
-        <button class="button" onclick={() => openFolder(installModal!.path)}>Abrir pasta</button>
+        <button class="button" onclick={() => openFolder(installModal!.path)}>{$t("settings.cookies.open_folder")}</button>
         <h4>Como instalar / atualizar</h4>
         <p class="hint">{installModal.hint}</p>
         <p class="hint small">

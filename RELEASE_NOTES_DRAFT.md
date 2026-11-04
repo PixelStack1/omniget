@@ -1,4 +1,13 @@
-# OmniGet v0.15.0 – draft release notes (branch `fixes`, based on v0.14.0)
+# OmniGet v0.15.1 – draft release notes (branch `work`, based on v0.15.0)
+
+Local draft only. Nothing has been tagged, pushed or released.
+
+## Fixes
+- The About page shows the fork maintainer, Corpse (@PixelStack1), and still credits the original author, OpenSelena.
+- The "Star on GitHub" button, the project page, the in-app changelog and announcements point to PixelStack1/omniget.
+- The About pages, the download list and several French strings are translated and capitalised correctly in all 12 languages.
+
+## OmniGet v0.15.0 – draft release notes (branch `fixes`, based on v0.14.0)
 
 Local draft only. Nothing has been tagged, pushed or released. The same notes ship inside the app (About → Changelog), translated into all 12 languages, from `src/lib/changelog/release-notes.ts`.
 

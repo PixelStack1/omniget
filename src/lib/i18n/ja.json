@@ -3677,7 +3677,7 @@
     },
     "empty_hint": "Paste a link on the home screen and it shows up here with speed, progress and a folder button.",
     "empty_cta": "Paste a link",
-    "speed_unlimited": "No speed limit",
+    "speed_unlimited": "速度制限なし",
     "error_details": "Technical details",
     "view_queue": "Downloads",
     "view_history": "History",
@@ -4816,7 +4816,7 @@
   },
   "about": {
     "tab": {
-      "overview": "Overview",
+      "overview": "概要",
       "terms": "利用規約",
       "project": "プロジェクト",
       "roadmap": "ロードマップ",
@@ -4832,12 +4832,12 @@
       "copy_failed": "クリップボードにコピーできませんでした"
     },
     "debug_disabled_redirect": "Debug page is hidden. Enable it in Settings → Advanced → Diagnostics.",
-    "card_changelog_title": "What's new",
-    "card_changelog_desc": "Release notes for every version.",
-    "card_project_title": "The project",
-    "card_project_desc": "Roadmap, philosophy and how to contribute.",
-    "card_terms_title": "Terms & ethics",
-    "card_terms_desc": "What OmniGet expects from you, and what you can expect back.",
+    "card_changelog_title": "新機能",
+    "card_changelog_desc": "各バージョンのリリースノート。",
+    "card_project_title": "プロジェクト",
+    "card_project_desc": "ロードマップ、理念、貢献の方法。",
+    "card_terms_title": "規約と倫理",
+    "card_terms_desc": "OmniGet があなたに求めること、そしてあなたが期待できること。",
     "description": "あなたのメディアダウンローダー。オープンソースで無料。",
     "terms_title": "利用規約",
     "terms_text": "OmniGetは現状のまま提供され、いかなる保証もありません。このアプリはインターネット上で公開されているコンテンツのダウンロードを容易にしますが、ダウンロードした内容やその使い方について一切の責任を負いません。OmniGetを使用することで、これに同意したものとみなします。",
@@ -4869,7 +4869,9 @@
     "roadmap_community_discord": "Discordでお気軽にどうぞ：",
     "roadmap_community_issue": "またはリポジトリでIssueを作成してください：",
     "tagline": "どこからでも、何でもダウンロード。",
-    "credit": "OpenSelena が愛を込めて作りました"
+    "credit": "メンテナー: Corpse",
+    "based_on": "OpenSelena の OmniGet をベースにしています",
+    "telegram_button": "OpenSelena の Telegram"
   },
   "marketplace": {
     "title": "マーケットプレイス",
@@ -5019,6 +5021,12 @@
         "toolchain": "インターフェースは SvelteKit 3、Vite 8、Vitest 5、TypeScript 7 の型チェックでビルドされるようになりました。",
         "katex": "KaTeX をすべて 0.18.10 に更新しました。",
         "ffmpeg": "最新ビルドが差し替えられても、FFmpeg の更新で誤ったハッシュエラーが出なくなりました。"
+      },
+      "fixes_0151": {
+        "title": "0.15.1 の修正",
+        "maintainer": "「情報」ページにフォークのメンテナー (Corpse) を表示し、OpenSelena のクレジットも残しました。",
+        "fork_links": "GitHub ボタンとリリースノートは PixelStack1/omniget を参照します。",
+        "translations": "「情報」ページとダウンロード一覧が全言語に翻訳されました。"
       }
     }
   },

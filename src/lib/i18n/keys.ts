@@ -19,6 +19,7 @@
  */
 
 export type TranslationKeys =
+  | 'about.based_on'
   | 'about.card_changelog_desc'
   | 'about.card_changelog_title'
   | 'about.card_project_desc'
@@ -67,6 +68,7 @@ export type TranslationKeys =
   | 'about.tab.roadmap'
   | 'about.tab.terms'
   | 'about.tagline'
+  | 'about.telegram_button'
   | 'about.terms_text'
   | 'about.terms_title'
   | 'about.version'
@@ -96,6 +98,10 @@ export type TranslationKeys =
   | 'changelog.notes.fixes.translations'
   | 'changelog.notes.fixes.video_ops'
   | 'changelog.notes.fixes.windows_build'
+  | 'changelog.notes.fixes_0151.fork_links'
+  | 'changelog.notes.fixes_0151.maintainer'
+  | 'changelog.notes.fixes_0151.title'
+  | 'changelog.notes.fixes_0151.translations'
   | 'changelog.notes.heading'
   | 'changelog.notes.security.checksums'
   | 'changelog.notes.security.ci'

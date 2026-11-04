@@ -4869,7 +4869,9 @@
     "roadmap_community_discord": "свяжитесь с нами в Discord:",
     "roadmap_community_issue": "или откройте задачу в репозитории:",
     "tagline": "Скачивайте что угодно, откуда угодно.",
-    "credit": "Сделано с любовью OpenSelena"
+    "credit": "Поддерживается Corpse",
+    "based_on": "Основано на OmniGet от OpenSelena",
+    "telegram_button": "Telegram OpenSelena"
   },
   "marketplace": {
     "title": "Маркетплейс",
@@ -5019,6 +5021,12 @@
         "toolchain": "Интерфейс теперь собирается с SvelteKit 3, Vite 8, Vitest 5 и проверкой типов TypeScript 7.",
         "katex": "KaTeX везде обновлён до 0.18.10.",
         "ffmpeg": "Обновления FFmpeg больше не выдают ложную ошибку хеша, когда последняя сборка заменяется."
+      },
+      "fixes_0151": {
+        "title": "Исправления 0.15.1",
+        "maintainer": "На странице «О программе» указан сопровождающий форка (Corpse), OpenSelena по-прежнему упомянута.",
+        "fork_links": "Кнопки GitHub и примечания к выпуску ведут на PixelStack1/omniget.",
+        "translations": "Страницы «О программе» и список загрузок переведены на все языки."
       }
     }
   },

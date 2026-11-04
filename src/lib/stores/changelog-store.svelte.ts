@@ -39,7 +39,7 @@ export async function initChangelog(): Promise<void> {
   try {
     currentVersion = await getVersion();
   } catch {
-    currentVersion = "0.15.0";
+    currentVersion = "0.15.1";
   }
 
   const lastSeen = localStorage.getItem(STORAGE_KEY);
@@ -71,7 +71,7 @@ export async function fetchChangelog(): Promise<string> {
 
   try {
     const res = await fetch(
-      `https://api.github.com/repos/OpenSelena/omniget/releases/tags/v${currentVersion}`,
+      `https://api.github.com/repos/PixelStack1/omniget/releases/tags/v${currentVersion}`,
       { headers: { Accept: "application/vnd.github.v3+json" } }
     );
     if (res.ok) {
@@ -85,7 +85,7 @@ export async function fetchChangelog(): Promise<string> {
 
   try {
     const res = await fetch(
-      "https://api.github.com/repos/OpenSelena/omniget/releases/latest",
+      "https://api.github.com/repos/PixelStack1/omniget/releases/latest",
       { headers: { Accept: "application/vnd.github.v3+json" } }
     );
     if (res.ok) {

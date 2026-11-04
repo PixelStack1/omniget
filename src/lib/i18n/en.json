@@ -4869,7 +4869,9 @@
     "roadmap_community_discord": "reach out on discord:",
     "roadmap_community_issue": "or open an issue on the repository:",
     "tagline": "Download anything, from anywhere.",
-    "credit": "Made with love by OpenSelena"
+    "credit": "Maintained by Corpse",
+    "based_on": "Based on OmniGet by OpenSelena",
+    "telegram_button": "OpenSelena's Telegram"
   },
   "marketplace": {
     "title": "Marketplace",
@@ -5019,6 +5021,12 @@
         "toolchain": "The interface now builds with SvelteKit 3, Vite 8, Vitest 5 and TypeScript 7 type checking.",
         "katex": "KaTeX is raised to 0.18.10 everywhere.",
         "ffmpeg": "FFmpeg updates no longer report a false checksum error when the latest build is replaced."
+      },
+      "fixes_0151": {
+        "title": "Fixes in 0.15.1",
+        "maintainer": "The About page shows the fork maintainer (Corpse) and still credits OpenSelena.",
+        "fork_links": "The GitHub buttons and release notes point to PixelStack1/omniget.",
+        "translations": "The About pages and the download list are translated in every language."
       }
     }
   },

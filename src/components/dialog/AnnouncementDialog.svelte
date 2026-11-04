@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { t } from "#lib/i18n/index.ts";
   import DialogContainer from "./DialogContainer.svelte";
   import {
     getAnnouncementOpen,
@@ -44,7 +45,7 @@
           <button
             type="button"
             class="close-btn"
-            aria-label="Close announcement"
+            aria-label={$t("common.close")}
             onclick={handleDismiss}
           >
             ✕
@@ -61,7 +62,7 @@
           <button
             type="button"
             class="close-btn-inline"
-            aria-label="Close announcement"
+            aria-label={$t("common.close")}
             onclick={handleDismiss}
           >
             ✕

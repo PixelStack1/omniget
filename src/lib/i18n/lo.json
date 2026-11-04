@@ -4869,7 +4869,9 @@
     "roadmap_community_discord": "ຕິດຕໍ່ຫາພວກເຮົາໃນ discord:",
     "roadmap_community_issue": "ຫຼື ເປີດ issue ໃນ repository:",
     "tagline": "ດາວໂຫຼດທຸກຢ່າງ, ຈາກທຸກບ່ອນ.",
-    "credit": "ສ້າງດ້ວຍຄວາມຮັກໂດຍ OpenSelena"
+    "credit": "ດູແລໂດຍ Corpse",
+    "based_on": "ອີງໃສ່ OmniGet ຂອງ OpenSelena",
+    "telegram_button": "Telegram ຂອງ OpenSelena"
   },
   "marketplace": {
     "title": "ຕະຫຼາດ",
@@ -5019,6 +5021,12 @@
         "toolchain": "ສ່ວນຕິດຕໍ່ຜູ້ໃຊ້ຕອນນີ້ສ້າງດ້ວຍ SvelteKit 3, Vite 8, Vitest 5 ແລະ ການກວດປະເພດ TypeScript 7.",
         "katex": "KaTeX ອັບເດດເປັນ 0.18.10 ທຸກບ່ອນ.",
         "ffmpeg": "ການອັບເດດ FFmpeg ບໍ່ລາຍງານຂໍ້ຜິດພາດ hash ທີ່ບໍ່ຖືກຕ້ອງອີກ ເມື່ອເວີຊັນລ່າສຸດຖືກແທນທີ່."
+      },
+      "fixes_0151": {
+        "title": "ການແກ້ໄຂ 0.15.1",
+        "maintainer": "ໜ້າກ່ຽວກັບສະແດງຜູ້ດູແລ fork (Corpse) ແລະ ຍັງໃຫ້ເຄຣດິດ OpenSelena.",
+        "fork_links": "ປຸ່ມ GitHub ແລະ ບັນທຶກເວີຊັນຊີ້ໄປທີ່ PixelStack1/omniget.",
+        "translations": "ໜ້າກ່ຽວກັບ ແລະ ລາຍການດາວໂຫຼດຖືກແປເປັນທຸກພາສາ."
       }
     }
   },
