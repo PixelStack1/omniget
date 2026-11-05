@@ -38,7 +38,7 @@ enum Commands {
 
         #[arg(
             long,
-            help = "Output container (mp4, mkv or webm), or an audio codec with --audio-only"
+            help = "Output container (mp4/mkv/webm), combined with -q; a yt-dlp format id (e.g. 137, 137+140) is also accepted. With --audio-only: audio format (mp3/m4a/opus...)"
         )]
         format: Option<String>,
     },

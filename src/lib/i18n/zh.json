@@ -5038,7 +5038,7 @@
       },
       "fixes_0154": {
         "title": "0.15.4 修复",
-        "cli_container": "命令行的 --format 现在用来选择容器（mp4、mkv 或 webm），不再当作格式 ID 传给 yt-dlp。"
+        "cli_container": "命令行的 --format 现在按所选画质选择容器（mp4、mkv 或 webm）。它不再作为格式 ID 传给 yt-dlp，因此 1080p 和 2160p 不会被换成 360p 文件。像 137+140 这样的真实格式 ID 保持不变。"
       }
     }
   },

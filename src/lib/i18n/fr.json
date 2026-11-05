@@ -5038,7 +5038,7 @@
       },
       "fixes_0154": {
         "title": "Corrections de la 0.15.4",
-        "cli_container": "L'option --format en ligne de commande choisit désormais le conteneur (mp4, mkv ou webm) au lieu d'être envoyée à yt-dlp comme identifiant de format."
+        "cli_container": "L'option --format en ligne de commande choisit désormais le conteneur (mp4, mkv ou webm) à la qualité demandée. Elle n'est plus envoyée à yt-dlp comme identifiant de format, donc le 1080p et le 2160p ne sont pas remplacés par un fichier en 360p. Un vrai identifiant, comme 137+140, reste inchangé."
       }
     }
   },

@@ -83,7 +83,7 @@
 
       --text: #171717;
       --text-muted: #666666;
-      --text-subtle: #888888;
+      --text-subtle: #6e6e6e;
       --text-inverse: #ffffff;
 
       --primary: #171717;
@@ -132,7 +132,7 @@
 
       --text: #ededed;
       --text-muted: #a1a1aa;
-      --text-subtle: #71717a;
+      --text-subtle: #868686;
       --text-inverse: #000000;
 
       --primary: #ededed;
@@ -823,8 +823,8 @@
       align-items: center;
       justify-content: space-between;
       gap: 12px;
-      height: 44px;
-      padding: 0 8px 0 16px;
+      min-height: 44px;
+      padding: 8px 8px 8px 16px;
       background: var(--code-header);
       border-bottom: 1px solid var(--code-border);
     }
@@ -833,9 +833,8 @@
       font-family: var(--font-mono);
       font-size: 12.5px;
       color: #a1a1aa;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      min-width: 0;
+      overflow-wrap: anywhere;
     }
 
     .btn-copy {
@@ -879,7 +878,7 @@
     }
 
     .tok-c {
-      color: #737373;
+      color: #8a8a8a;
     }
 
     /* ---------- Prev / next pagination ---------- */
@@ -1196,6 +1195,7 @@
 
     @media (max-width: 768px) {
       .nav-links { display: none; }
+      .nav-subtabs { display: none; }
       .brand-badge { display: none; }
       .mobile-sidebar-toggle { display: flex; }
       .search-trigger {
@@ -1585,10 +1585,12 @@
   <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" /></svg><span>Copy</span></button>
         </div>
         <div class="code-body">
-<pre><code><span class="tok-c"># Install OmniGet via winget:</span>
+<pre><code><span class="tok-c"># Install OmniGet via winget:
+</span>
 winget install -e --id OpenSelena.OmniGet
 
-<span class="tok-c"># Update to latest version:</span>
+<span class="tok-c"># Update to latest version:
+</span>
 winget upgrade --id OpenSelena.OmniGet</code></pre>
         </div>
       </div>
@@ -1664,10 +1666,12 @@ winget upgrade --id OpenSelena.OmniGet</code></pre>
   <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" /></svg><span>Copy</span></button>
         </div>
         <div class="code-body">
-<pre><code><span class="tok-c"># 1. Strip the macOS quarantine extended attribute:</span>
+<pre><code><span class="tok-c"># 1. Strip the macOS quarantine extended attribute:
+</span>
 xattr -cr /Applications/omniget.app
 
-<span class="tok-c"># 2. Re-sign the app ad-hoc:</span>
+<span class="tok-c"># 2. Re-sign the app ad-hoc:
+</span>
 codesign --force --deep --sign - /Applications/omniget.app</code></pre>
         </div>
       </div>
@@ -1704,13 +1708,16 @@ codesign --force --deep --sign - /Applications/omniget.app</code></pre>
   <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" /></svg><span>Copy</span></button>
         </div>
         <div class="code-body">
-<pre><code><span class="tok-c"># Ubuntu / Debian / Linux Mint:</span>
+<pre><code><span class="tok-c"># Ubuntu / Debian / Linux Mint:
+</span>
 sudo apt install gstreamer1.0-plugins-good gstreamer1.0-plugins-bad gstreamer1.0-libav
 
-<span class="tok-c"># Fedora / RHEL / CentOS:</span>
+<span class="tok-c"># Fedora / RHEL / CentOS:
+</span>
 sudo dnf install gstreamer1-plugins-good gstreamer1-plugins-bad-free gstreamer1-plugin-libav
 
-<span class="tok-c"># Arch Linux / Manjaro:</span>
+<span class="tok-c"># Arch Linux / Manjaro:
+</span>
 sudo pacman -S gst-plugins-good gst-plugins-bad gst-libav</code></pre>
         </div>
       </div>
@@ -1726,10 +1733,12 @@ sudo pacman -S gst-plugins-good gst-plugins-bad gst-libav</code></pre>
   <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" /></svg><span>Copy</span></button>
         </div>
         <div class="code-body">
-<pre><code><span class="tok-c"># Install libfuse2 on Ubuntu 24.04:</span>
+<pre><code><span class="tok-c"># Install libfuse2 on Ubuntu 24.04:
+</span>
 sudo apt install libfuse2
 
-<span class="tok-c"># Or launch without root permissions:</span>
+<span class="tok-c"># Or launch without root permissions:
+</span>
 chmod +x OmniGet_0.12.0_amd64.AppImage
 ./OmniGet_0.12.0_amd64.AppImage --appimage-extract-and-run</code></pre>
         </div>
@@ -1762,17 +1771,21 @@ chmod +x OmniGet_0.12.0_amd64.AppImage
   <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" /></svg><span>Copy</span></button>
         </div>
         <div class="code-body">
-<pre><code><span class="tok-c"># 1. Clone repository:</span>
+<pre><code><span class="tok-c"># 1. Clone repository:
+</span>
 git clone https://github.com/PixelStack1/omniget.git
 cd omniget
 
-<span class="tok-c"># 2. Install frontend dependencies:</span>
+<span class="tok-c"># 2. Install frontend dependencies:
+</span>
 pnpm install
 
-<span class="tok-c"># 3. Launch development server:</span>
+<span class="tok-c"># 3. Launch development server:
+</span>
 pnpm tauri dev
 
-<span class="tok-c"># 4. Build local production binary:</span>
+<span class="tok-c"># 4. Build local production binary:
+</span>
 pnpm tauri build --config '{"bundle":{"createUpdaterArtifacts":false}}'</code></pre>
         </div>
       </div>

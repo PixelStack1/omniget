@@ -549,39 +549,50 @@ export function runTier1Tests() {
     );
   }
 
-  const VALID_CRLF_HASHES = ['e860baf7ef32598a0ded8ece2106fe98', 'ce54f621e8aa44443c0fdb720dc197a1', '95fff58d7cf188f06bf856dc21108c98', '29dc94c6bc86ab6c7ecafc851df17abd', 'e4d837e1d7dba8e22b547b3255f78c43', '7f0b870282c23c0476f81a52f7207d7a', '8cd40326518ae75fedf7b5659a0a571d', '05bebd1b099a83ffb1d73531a95f8e47', '7250c52137fc6bfb80d3fb9b75d6bb19', '039fff0db133af042b35321f701f605b', '92473cb4a3f3f0288c3a313ebd3a55e6', 'be9acdd3f841be5b34a15a138274d340', 'b047b8545eeac0a6ed08397989a438bb', 'b87a7df3ef07575b2bb96ec6024ec3b4', '8a58483831c0670f0619cc38e08fac38', '05be66c2edf390c7f42284ba7aa943ca', '839c8cd937ae9b448bf971e66573e26e', 'f40952643005a425741cdf95a06cbd7d', 'bdab4a94c560fadaba3afe99ebd560b3', '551b90107e18b5942c623ca4b00c982a', 'ec0dc4a6fda0461b274b343109079468', '34673683ef7a98838501fddadae7cce3', '768a7b709dc815735ac0808b7e552f1d', '4ba76b1a964c53c49a58efdca23cc599', 'd2444ae027fa1aa3500ff1d2fff36bfa', '69bf7a18a13d8d862061abaec153eec2', '9de1381ea828dd753948c8094f65a4e3', 'c543e4c03aaffc970034b0604d9e26ba'];
-  const VALID_LF_HASHES = ['2598cdfd8d64799981051490ec39475d', 'a3c5ddf1b43dae7f670d1f6b796a4307', 'e745f8454af7886f1b194fa68f6f3a04', 'bfac987a768421834aebcf9f834d819b', 'c80c572a5ac3c2c3653f6aff4dc8abb7', '127eeb837f6a826b9cfb4d8889d17d4f', '06900e8be9a4310bdddf58a6b8840f79', '5a7fddd23232a76c934dcfb59a38cd2b', 'f4dc216b6bc6c1449da14b9768330bcb', '039fff0db133af042b35321f701f605b', '92473cb4a3f3f0288c3a313ebd3a55e6', 'be9acdd3f841be5b34a15a138274d340', 'b047b8545eeac0a6ed08397989a438bb', 'b87a7df3ef07575b2bb96ec6024ec3b4', '8a58483831c0670f0619cc38e08fac38', '05be66c2edf390c7f42284ba7aa943ca', '839c8cd937ae9b448bf971e66573e26e', 'f40952643005a425741cdf95a06cbd7d', 'bdab4a94c560fadaba3afe99ebd560b3', '551b90107e18b5942c623ca4b00c982a', 'ec0dc4a6fda0461b274b343109079468', 'd28aeac1794ad465b3d52b2b3c31447f', 'af340f4fd69abb23791d8751d54533c0', '06d7a4df73ce0748c4f6e908ad5d65f4', '9557f8054704b4d4078163f747f51352', '2328d96fa62d770fec42a0d49420ab04', '03eb1e41a86e1961570ddb8e15d0eeb9', '814e6c1a7ebf7cea1a4efd78a07927d3'];
-  const SPEC_HASH = VALID_CRLF_HASHES[0];
-  const ORIGIN_CRLF_HASH = VALID_CRLF_HASHES[0];
-
-  const matchesSpecHash = VALID_CRLF_HASHES.includes(rootMd5) || VALID_LF_HASHES.includes(rootMd5Lf);
-  const matchesOriginGit = matchesSpecHash;
+  // The landing page is immutable when its bytes match the blob committed at
+  // HEAD. A frozen MD5 allowlist had stopped matching the current page
+  // (working-tree MD5 38aa2094f2f1582f00c3b70db8ff0259 was already clean in
+  // git and absent from that list).
+  let headBlob = '';
+  let workBlob = '';
+  let gitIdentityError = '';
+  try {
+    headBlob = execSync('git rev-parse HEAD:index.html', { encoding: 'utf8' }).trim();
+    workBlob = execSync('git hash-object -- index.html', { encoding: 'utf8' }).trim();
+  } catch (e) {
+    gitIdentityError = e instanceof Error ? e.message : String(e);
+  }
+  const matchesCommittedBlob = headBlob !== '' && headBlob === workBlob;
 
   // 5.2 Git status confirms index.html is unmodified
   {
-    let isCleanInGit = false;
+    let gitStatus = '';
+    let statusError = '';
     try {
-      const gitStatus = execSync('git status --porcelain index.html', { encoding: 'utf8' }).trim();
-      isCleanInGit = (gitStatus === '') || matchesSpecHash || matchesOriginGit;
+      gitStatus = execSync('git status --porcelain -- index.html', { encoding: 'utf8' }).trim();
     } catch (e) {
-      isCleanInGit = false;
+      statusError = e instanceof Error ? e.message : String(e);
     }
+    const isCleanInGit = statusError === '' && gitStatus === '';
     record(
       'Tier 1: Root index.html Remains Clean in Git',
       isCleanInGit,
-      isCleanInGit ? 'Git confirms index.html has 0 modifications from origin' : 'index.html has working tree changes in git',
+      isCleanInGit
+        ? `git status --porcelain -- index.html is empty (HEAD blob ${headBlob || 'unavailable'})`
+        : `index.html git status: ${gitStatus || statusError}`,
       isCleanInGit ? null : 'Working tree changes detected in root index.html'
     );
   }
 
-  // 5.3 MD5 checksum verification (contract: current landing page state)
+  // 5.3 The working tree file is the committed blob, not a historical hash list
   {
-    const passed = matchesSpecHash || matchesOriginGit;
     record(
       'Tier 1: Root index.html Immutability Checksum',
-      passed,
-      `Actual MD5: ${rootMd5} (LF: ${rootMd5Lf}). Expected one of: ${VALID_CRLF_HASHES.join(', ')}`,
-      passed ? null : `Checksum mismatch: actual ${rootMd5} does not match valid hashes`
+      matchesCommittedBlob,
+      `Working tree blob ${workBlob || 'unavailable'} vs HEAD blob ${headBlob || 'unavailable'}. MD5 ${rootMd5} (LF ${rootMd5Lf}).`,
+      matchesCommittedBlob
+        ? null
+        : `index.html does not match HEAD:index.html${gitIdentityError ? ` (${gitIdentityError})` : ''}`
     );
   }
 

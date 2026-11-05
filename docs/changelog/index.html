@@ -83,7 +83,7 @@
 
       --text: #171717;
       --text-muted: #666666;
-      --text-subtle: #888888;
+      --text-subtle: #6e6e6e;
       --text-inverse: #ffffff;
 
       --primary: #171717;
@@ -132,7 +132,7 @@
 
       --text: #ededed;
       --text-muted: #a1a1aa;
-      --text-subtle: #71717a;
+      --text-subtle: #868686;
       --text-inverse: #000000;
 
       --primary: #ededed;
@@ -823,8 +823,8 @@
       align-items: center;
       justify-content: space-between;
       gap: 12px;
-      height: 44px;
-      padding: 0 8px 0 16px;
+      min-height: 44px;
+      padding: 8px 8px 8px 16px;
       background: var(--code-header);
       border-bottom: 1px solid var(--code-border);
     }
@@ -833,9 +833,8 @@
       font-family: var(--font-mono);
       font-size: 12.5px;
       color: #a1a1aa;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      min-width: 0;
+      overflow-wrap: anywhere;
     }
 
     .btn-copy {
@@ -879,7 +878,7 @@
     }
 
     .tok-c {
-      color: #737373;
+      color: #8a8a8a;
     }
 
     /* ---------- Prev / next pagination ---------- */
@@ -1196,6 +1195,7 @@
 
     @media (max-width: 768px) {
       .nav-links { display: none; }
+      .nav-subtabs { display: none; }
       .brand-badge { display: none; }
       .mobile-sidebar-toggle { display: flex; }
       .search-trigger {
@@ -1518,9 +1518,9 @@
             Command-line container selection
           </h3>
           <ul class="release-list">
-            <li><code>omniget download --format</code> now selects the output container (<code>mp4</code>, <code>mkv</code>, or <code>webm</code>) with <code>--merge-output-format</code>.</li>
-            <li>Those names are no longer sent to yt-dlp as a format id, which previously kept a single progressive stream instead of merging the best video and audio.</li>
-            <li>With <code>--audio-only</code>, <code>mp4</code> and <code>mkv</code> map to <code>m4a</code>, and <code>webm</code> maps to <code>opus</code>. A real format id such as <code>22</code> is unchanged.</li>
+            <li><code>omniget download --format</code> with <code>-q</code> keeps the requested height for <code>mp4</code>, <code>mkv</code>, and <code>webm</code>. It no longer becomes <code>-f mp4</code>, which picked a pre-merged file, often 360p.</li>
+            <li>mp4 and webm prefer streams that already use that container, still limited to the chosen height, then the normal quality selector. mkv muxes the normal selection into mkv.</li>
+            <li>A real format id such as <code>137+140</code> is unchanged. <code>--audio-only</code> still passes <code>mp3</code>, <code>m4a</code>, or <code>opus</code> through and does not remux.</li>
           </ul>
         </div>
       </article>

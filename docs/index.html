@@ -83,7 +83,7 @@
 
       --text: #171717;
       --text-muted: #666666;
-      --text-subtle: #888888;
+      --text-subtle: #6e6e6e;
       --text-inverse: #ffffff;
 
       --primary: #171717;
@@ -132,7 +132,7 @@
 
       --text: #ededed;
       --text-muted: #a1a1aa;
-      --text-subtle: #71717a;
+      --text-subtle: #868686;
       --text-inverse: #000000;
 
       --primary: #ededed;
@@ -670,6 +670,10 @@
     }
 
     /* Inline code */
+    .docs-main small {
+      font-size: 12px;
+    }
+
     .docs-main code {
       font-family: var(--font-mono);
       font-size: 0.855em;
@@ -718,6 +722,14 @@
       color: var(--callout-text);
       font-size: 14.5px;
       line-height: 1.6;
+    }
+
+    .privacy-links a {
+      color: #0057c2;
+    }
+
+    html.dark .privacy-links a {
+      color: #8eb6ff;
     }
 
     .callout .icon-lg {
@@ -823,8 +835,8 @@
       align-items: center;
       justify-content: space-between;
       gap: 12px;
-      height: 44px;
-      padding: 0 8px 0 16px;
+      min-height: 44px;
+      padding: 8px 8px 8px 16px;
       background: var(--code-header);
       border-bottom: 1px solid var(--code-border);
     }
@@ -833,9 +845,8 @@
       font-family: var(--font-mono);
       font-size: 12.5px;
       color: #a1a1aa;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      min-width: 0;
+      overflow-wrap: anywhere;
     }
 
     .btn-copy {
@@ -879,7 +890,7 @@
     }
 
     .tok-c {
-      color: #737373;
+      color: #8a8a8a;
     }
 
     /* ---------- Prev / next pagination ---------- */
@@ -1196,6 +1207,7 @@
 
     @media (max-width: 768px) {
       .nav-links { display: none; }
+      .nav-subtabs { display: none; }
       .brand-badge { display: none; }
       .mobile-sidebar-toggle { display: flex; }
       .search-trigger {
@@ -1527,7 +1539,7 @@
   <path d="M12 8h.01" /></svg>
         <div>
           <strong>Version 0.15.4 Release Update:</strong>
-          The CLI <code>--format</code> option now selects an mp4, mkv, or webm container instead of sending that name to yt-dlp as a format id.
+          The CLI <code>--format</code> option keeps the quality you pick when choosing an mp4, mkv, or webm container, instead of sending that name to yt-dlp as a format id.
         </div>
       </div>
 
@@ -1855,7 +1867,7 @@
       <p class="doc-p">
         OmniGet is licensed under GPL-3.0. The full source code is public on <a href="https://github.com/PixelStack1/omniget" target="_blank" rel="noopener">GitHub</a>. You can inspect all network and database code directly, or verify that the app sends no telemetry by monitoring network traffic with Wireshark, Fiddler, or mitmproxy.
       </p>
-      <div style="background: rgba(255, 125, 56, 0.08); border-left: 3px solid #FF7D38; padding: 12px 16px; border-radius: 4px; margin: 16px 0; font-size: 13.5px; line-height: 1.6; color: var(--text);">
+      <div class="privacy-links" style="background: rgba(255, 125, 56, 0.08); border-left: 3px solid #FF7D38; padding: 12px 16px; border-radius: 4px; margin: 16px 0; font-size: 13.5px; line-height: 1.6; color: var(--text);">
         <strong>Disclaimer:</strong> Maintained by <a href="https://github.com/PixelStack1" target="_blank" rel="noopener">Corpse</a> under GPL-3.0 · Based on original architecture by <a href="https://github.com/tonhowtf" target="_blank" rel="noopener">tonhowtf</a>.
       </div>
 
@@ -1964,9 +1976,9 @@
           </a>
         </div>
         <ul style="margin-left: 20px; color: var(--text-muted); font-size: 14px; line-height: 1.6; display: grid; gap: 4px;">
-          <li><code>omniget download --format</code> selects the output container (mp4, mkv, or webm) with <code>--merge-output-format</code>.</li>
-          <li>Those names are no longer sent to yt-dlp as a format id.</li>
-          <li>With <code>--audio-only</code>, mp4 and mkv map to m4a, and webm maps to opus.</li>
+          <li><code>omniget download --format</code> with <code>-q</code> keeps 1080p or 2160p for mp4, mkv, and webm instead of falling back to a 360p file.</li>
+          <li>mp4 and webm prefer matching streams at that height. mkv muxes the normal selection. A real format id such as <code>137+140</code> is unchanged.</li>
+          <li><code>--audio-only</code> still passes mp3, m4a, or opus through and does not remux.</li>
         </ul>
       </div>
 

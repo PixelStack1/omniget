@@ -3215,68 +3215,62 @@ pub fn default_format_selector(
     format!("{preferred}/{base}")
 }
 
-/// `mp4`, `mkv` and `webm` name a container. The CLI `--format` flag documents
-/// them that way, but they used to be forwarded as a yt-dlp `-f` selector
-/// (`-f mp4`), which picks a single stream instead of merging into that container.
-#[derive(Debug, PartialEq, Eq)]
-pub(crate) struct ContainerFormatPlan {
-    pub selector: Option<String>,
-    pub merge_container: Option<String>,
-    pub audio_format: Option<String>,
+/// Container keywords accepted in place of a format id (the CLI's
+/// `--format mp4|mkv|webm`). They select the output container, not a stream.
+/// Real format ids (`137`, `18`, `137+140`) are left unchanged.
+pub fn container_preference(format_id: Option<&str>) -> Option<&'static str> {
+    match format_id?.trim().to_ascii_lowercase().as_str() {
+        "mp4" => Some("mp4"),
+        "mkv" => Some("mkv"),
+        "webm" => Some("webm"),
+        _ => None,
+    }
 }
 
-fn container_name(raw: &str) -> Option<String> {
-    let normalized = raw.trim().trim_start_matches('.').to_ascii_lowercase();
-    matches!(normalized.as_str(), "mp4" | "mkv" | "webm").then_some(normalized)
-}
-
-pub(crate) fn plan_container_format(
-    format_id: Option<&str>,
-    audio_format: Option<&str>,
-    audio_only: bool,
-) -> ContainerFormatPlan {
-    let (selector, merge_container) = match format_id.map(str::trim).filter(|s| !s.is_empty()) {
-        Some(raw) => match container_name(raw) {
-            Some(container) if !audio_only => (None, Some(container)),
-            Some(_) => (None, None),
-            None => (Some(raw.to_string()), None),
-        },
-        None => (None, None),
+/// Format selector for a container preference. Streams that already match the
+/// container come first, still limited to the requested height, then the
+/// regular quality selector. That avoids `-f mp4`, which picks the best
+/// pre-merged file (often 360p) and ignores 1080p or 2160p.
+pub fn container_format_selector(
+    container: &str,
+    mode: &str,
+    quality_height: Option<u32>,
+    ffmpeg_available: bool,
+    allow_h265: bool,
+) -> String {
+    let base = default_format_selector(mode, quality_height, ffmpeg_available, allow_h265);
+    if mode == "audio" || !ffmpeg_available {
+        return base;
+    }
+    let h = quality_height
+        .filter(|h| *h > 0)
+        .map(|h| format!("[height<={}]", h))
+        .unwrap_or_default();
+    let preferred = match (container, mode) {
+        ("mp4", "mute") => format!("bv*[ext=mp4]{h}"),
+        ("webm", "mute") => format!("bv*[ext=webm]{h}"),
+        ("mp4", _) => format!("bv*[ext=mp4]{h}+ba[ext=m4a]"),
+        ("webm", _) => format!("bv*[ext=webm]{h}+ba[ext=webm]"),
+        // mkv can hold the streams the default selector already chose.
+        _ => return base,
     };
-    let audio_format = audio_format
-        .map(str::trim)
-        .filter(|raw| !raw.is_empty())
-        .map(|raw| match container_name(raw).as_deref() {
-            Some("webm") => "opus".to_string(),
-            Some("mp4" | "mkv") => "m4a".to_string(),
-            _ => raw.to_string(),
-        });
-    ContainerFormatPlan {
-        selector,
-        merge_container,
-        audio_format,
-    }
+    format!("{preferred}/{base}")
 }
 
-/// Last `--merge-output-format` in the extra flags, either `--opt value` or `--opt=value`.
-pub(crate) fn merge_container_from_flags(flags: &[String]) -> Option<String> {
-    let mut chosen = None;
-    let mut index = 0;
-    while index < flags.len() {
-        let flag = flags[index].as_str();
-        if let Some(value) = flag.strip_prefix("--merge-output-format=") {
-            if !value.is_empty() {
-                chosen = Some(value.to_string());
-            }
-        } else if flag == "--merge-output-format" {
-            if let Some(value) = flags.get(index + 1).filter(|value| !value.is_empty()) {
-                chosen = Some(value.clone());
-                index += 1;
-            }
-        }
-        index += 1;
+/// `--merge-output-format` args: the requested container, or mp4 by default.
+/// Audio-only and ffmpeg-less downloads do not merge.
+pub fn merge_output_args(
+    mode: &str,
+    ffmpeg_available: bool,
+    container: Option<&str>,
+) -> Vec<String> {
+    if mode == "audio" || !ffmpeg_available {
+        return Vec::new();
     }
-    chosen
+    vec![
+        "--merge-output-format".to_string(),
+        container.unwrap_or("mp4").to_string(),
+    ]
 }
 
 #[allow(clippy::too_many_arguments)]
@@ -3327,12 +3321,6 @@ pub async fn download_video(
         .await;
     }
 
-    // A container name in `format_id` (the CLI `--format` channel every platform
-    // already forwards) must not become `-f mp4`.
-    let format_plan = plan_container_format(format_id, audio_format, is_audio_only);
-    let format_id = format_plan.selector.as_deref();
-    let audio_format = format_plan.audio_format.as_deref();
-
     let (ffmpeg_res, aria2c_path) = tokio::join!(
         crate::core::dependencies::ensure_ffmpeg(),
         crate::core::dependencies::ensure_aria2c(),
@@ -3340,7 +3328,12 @@ pub async fn download_video(
     let ffmpeg_available = ffmpeg_res.is_ok() || crate::core::ffmpeg::is_ffmpeg_available().await;
     let ffmpeg_location = find_ffmpeg_location_cached().await;
 
-    let format_selector = if let Some(fid) = format_id {
+    let container = container_preference(format_id);
+    // A container keyword must not stay in `-f`. Explicit ids are unchanged.
+    let format_id = if container.is_some() { None } else { format_id };
+    let format_selector = if let Some(c) = container {
+        container_format_selector(c, mode, quality_height, ffmpeg_available, allow_h265())
+    } else if let Some(fid) = format_id {
         if let Some(h) = quality_height.filter(|h| *h > 0) {
             let fallback = match mode {
                 "audio" => "ba/b".to_string(),
@@ -3512,13 +3505,7 @@ pub async fn download_video(
         }
     }
 
-    if mode != "audio" && ffmpeg_available {
-        let container = merge_container_from_flags(&effective_extra_flags)
-            .or_else(|| format_plan.merge_container.clone())
-            .unwrap_or_else(|| "mp4".to_string());
-        base_args.push("--merge-output-format".to_string());
-        base_args.push(container);
-    }
+    base_args.extend(merge_output_args(mode, ffmpeg_available, container));
 
     if let Some(ref_url) = referer {
         base_args.push("--referer".to_string());
@@ -4280,7 +4267,10 @@ pub async fn download_video(
                 }
 
                 yt_args.player_client = None;
-                base_args.retain(|a| a != "--merge-output-format" && a != "mp4");
+                // Drop whichever container was requested, not only a literal "mp4".
+                if let Some(pos) = base_args.iter().position(|a| a == "--merge-output-format") {
+                    base_args.drain(pos..(pos + 2).min(base_args.len()));
+                }
 
                 if let Some(pos) = base_args.iter().position(|a| a == "-f") {
                     base_args.remove(pos + 1);
@@ -5769,60 +5759,6 @@ mod tests {
     use super::*;
 
     #[test]
-    fn container_names_are_not_format_selectors() {
-        let plan = plan_container_format(Some("mp4"), None, false);
-        assert_eq!(plan.selector, None);
-        assert_eq!(plan.merge_container.as_deref(), Some("mp4"));
-
-        let plan = plan_container_format(Some(" MKV "), None, false);
-        assert_eq!(plan.selector, None);
-        assert_eq!(plan.merge_container.as_deref(), Some("mkv"));
-
-        let plan = plan_container_format(Some(".webm"), None, false);
-        assert_eq!(plan.merge_container.as_deref(), Some("webm"));
-
-        let plan = plan_container_format(Some("22"), None, false);
-        assert_eq!(plan.selector.as_deref(), Some("22"));
-        assert_eq!(plan.merge_container, None);
-
-        let plan = plan_container_format(Some("bv*+ba/b"), None, false);
-        assert_eq!(plan.selector.as_deref(), Some("bv*+ba/b"));
-        assert_eq!(plan.merge_container, None);
-    }
-
-    #[test]
-    fn audio_container_names_map_to_audio_codecs() {
-        let mp4 = plan_container_format(None, Some("mp4"), true);
-        assert_eq!(mp4.audio_format.as_deref(), Some("m4a"));
-        assert_eq!(mp4.selector, None);
-        assert_eq!(mp4.merge_container, None);
-
-        let webm = plan_container_format(None, Some("webm"), true);
-        assert_eq!(webm.audio_format.as_deref(), Some("opus"));
-
-        let mkv = plan_container_format(None, Some("mkv"), true);
-        assert_eq!(mkv.audio_format.as_deref(), Some("m4a"));
-
-        let mp3 = plan_container_format(None, Some("mp3"), true);
-        assert_eq!(mp3.audio_format.as_deref(), Some("mp3"));
-    }
-
-    #[test]
-    fn explicit_merge_output_format_flag_wins() {
-        let flags = vec![
-            "--merge-output-format".to_string(),
-            "mkv".to_string(),
-            "--merge-output-format=webm".to_string(),
-        ];
-        assert_eq!(merge_container_from_flags(&flags).as_deref(), Some("webm"));
-        assert_eq!(merge_container_from_flags(&[]), None);
-        assert_eq!(
-            merge_container_from_flags(&["--no-mtime".to_string()]),
-            None
-        );
-    }
-
-    #[test]
     fn playlist_dump_uses_top_level_url() {
         let dump = r#"{"id":"abc","title":"Video A","url":"https://example.com/video/abc","playlist_title":"My List"}"#;
         let (title, entries) = parse_playlist_dump(dump, "https://example.com/playlist/1");
@@ -6767,7 +6703,100 @@ mod e2e {
 
 #[cfg(test)]
 mod hevc_tests {
-    use super::default_format_selector;
+    use super::{
+        container_format_selector, container_preference, default_format_selector, merge_output_args,
+    };
+
+    #[test]
+    fn merge_output_format_follows_container() {
+        assert_eq!(
+            merge_output_args("auto", true, None),
+            ["--merge-output-format", "mp4"]
+        );
+        assert_eq!(
+            merge_output_args("auto", true, Some("mkv")),
+            ["--merge-output-format", "mkv"]
+        );
+        assert_eq!(
+            merge_output_args("video", true, Some("webm")),
+            ["--merge-output-format", "webm"]
+        );
+        assert!(merge_output_args("audio", true, Some("mp4")).is_empty());
+        assert!(merge_output_args("auto", false, Some("mkv")).is_empty());
+    }
+
+    #[test]
+    fn container_keywords_are_not_format_ids() {
+        assert_eq!(container_preference(Some("mp4")), Some("mp4"));
+        assert_eq!(container_preference(Some("MKV")), Some("mkv"));
+        assert_eq!(container_preference(Some(" webm ")), Some("webm"));
+        for id in [
+            "137", "18", "22", "137+140", "bv*+ba/b", "mp3", "m4a", "opus",
+        ] {
+            assert_eq!(container_preference(Some(id)), None, "{id}");
+        }
+        assert_eq!(container_preference(None), None);
+    }
+
+    #[test]
+    fn container_selectors_keep_requested_quality() {
+        for height in [1080_u32, 2160] {
+            let mp4 = container_format_selector("mp4", "video", Some(height), true, true);
+            let limit = format!("[height<={height}]");
+            assert!(
+                mp4.starts_with(&format!("bv*[ext=mp4]{limit}+ba[ext=m4a]/")),
+                "{mp4}"
+            );
+            assert!(mp4.contains(&limit), "{mp4}");
+            assert!(!mp4.starts_with("mp4"), "{mp4}");
+            assert!(!mp4.contains("height<=360"), "{mp4}");
+        }
+        let webm = container_format_selector("webm", "video", Some(1080), true, true);
+        assert!(webm.starts_with("bv*[ext=webm][height<=1080]+ba[ext=webm]/"));
+        assert!(webm.contains("bv*[height<=1080]+ba"));
+        assert!(!webm.contains("height<=360"));
+        assert_eq!(
+            container_format_selector("mkv", "video", Some(2160), true, false),
+            default_format_selector("video", Some(2160), true, false)
+        );
+        let mkv = container_format_selector("mkv", "video", Some(2160), true, false);
+        assert!(mkv.contains("[height<=2160]"));
+        assert!(!mkv.starts_with("mkv"));
+    }
+
+    #[test]
+    fn container_selectors_without_quality() {
+        assert_eq!(
+            container_format_selector("mp4", "video", None, true, true),
+            "bv*[ext=mp4]+ba[ext=m4a]/bv*+ba[ext=m4a]/bv*+ba/b"
+        );
+        assert_eq!(
+            container_format_selector("webm", "video", None, true, true),
+            "bv*[ext=webm]+ba[ext=webm]/bv*+ba[ext=m4a]/bv*+ba/b"
+        );
+        assert_eq!(
+            container_format_selector("mkv", "video", None, true, true),
+            default_format_selector("video", None, true, true)
+        );
+        assert_eq!(
+            container_format_selector("mp4", "video", Some(1080), false, true),
+            default_format_selector("video", Some(1080), false, true)
+        );
+    }
+
+    #[test]
+    fn audio_only_keeps_the_audio_selector_and_does_not_merge() {
+        assert_eq!(
+            container_format_selector("mp4", "audio", Some(1080), true, true),
+            default_format_selector("audio", Some(1080), true, true)
+        );
+        assert_eq!(
+            container_format_selector("webm", "audio", None, true, false),
+            "ba/b"
+        );
+        assert!(merge_output_args("audio", true, Some("mkv")).is_empty());
+        assert!(merge_output_args("audio", true, Some("webm")).is_empty());
+    }
 
     #[test]
     fn hevc_is_skipped_by_default_with_fallback() {

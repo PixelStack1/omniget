@@ -5038,7 +5038,7 @@
       },
       "fixes_0154": {
         "title": "Correções da 0.15.4",
-        "cli_container": "A opção --format da linha de comando agora escolhe o contêiner (mp4, mkv ou webm) em vez de ser enviada ao yt-dlp como um id de formato."
+        "cli_container": "A opção --format da linha de comando agora escolhe o contêiner (mp4, mkv ou webm) na qualidade pedida. Ela não vai mais ao yt-dlp como um id de formato, então 1080p e 2160p não são trocados por um arquivo em 360p. Um id real, como 137+140, permanece igual."
       }
     }
   },
