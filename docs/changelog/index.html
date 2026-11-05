@@ -83,7 +83,7 @@
 
       --text: #171717;
       --text-muted: #666666;
-      --text-subtle: #888888;
+      --text-subtle: #6e6e6e;
       --text-inverse: #ffffff;
 
       --primary: #171717;
@@ -132,7 +132,7 @@
 
       --text: #ededed;
       --text-muted: #a1a1aa;
-      --text-subtle: #71717a;
+      --text-subtle: #868686;
       --text-inverse: #000000;
 
       --primary: #ededed;
@@ -823,8 +823,8 @@
       align-items: center;
       justify-content: space-between;
       gap: 12px;
-      height: 44px;
-      padding: 0 8px 0 16px;
+      min-height: 44px;
+      padding: 8px 8px 8px 16px;
       background: var(--code-header);
       border-bottom: 1px solid var(--code-border);
     }
@@ -833,9 +833,8 @@
       font-family: var(--font-mono);
       font-size: 12.5px;
       color: #a1a1aa;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      min-width: 0;
+      overflow-wrap: anywhere;
     }
 
     .btn-copy {
@@ -879,7 +878,7 @@
     }
 
     .tok-c {
-      color: #737373;
+      color: #8a8a8a;
     }
 
     /* ---------- Prev / next pagination ---------- */
@@ -1196,6 +1195,7 @@
 
     @media (max-width: 768px) {
       .nav-links { display: none; }
+      .nav-subtabs { display: none; }
       .brand-badge { display: none; }
       .mobile-sidebar-toggle { display: flex; }
       .search-trigger {
@@ -1415,7 +1415,7 @@
           <li>
             <a href="../courses/" class="sidebar-link">
               <span>36 Course Platforms</span>
-              <span class="sidebar-tag">v0.15.3</span>
+              <span class="sidebar-tag">v0.15.4</span>
             </a>
           </li>
         </ul>
@@ -1496,12 +1496,41 @@
         Release notes, feature changes, and system patches for OmniGet. All desktop releases are signed, reproducible, and published with SHA-256 binary validation.
       </p>
 
+            <!-- v0.15.4 Release -->
+      <article class="release-box" id="v0-15-4">
+        <div class="release-header">
+          <div>
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span class="release-tag-pill">v0.15.4 Stable</span>
+              <span class="release-date">Released November 2026</span>
+            </div>
+            <h2 class="release-title">CLI container format</h2>
+          </div>
+          <a href="https://github.com/PixelStack1/omniget/releases/tag/v0.15.4" target="_blank" rel="noopener" class="subtab-item" style="border: 1px solid var(--border); text-decoration: none;">
+            <span>GitHub Tag</span>
+            <svg class="icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+        </div>
+
+        <div class="release-section">
+          <h3 class="release-section-title">
+            <svg class="icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+            Command-line container selection
+          </h3>
+          <ul class="release-list">
+            <li><code>omniget download --format</code> with <code>-q</code> keeps the requested height for <code>mp4</code>, <code>mkv</code>, and <code>webm</code>. It no longer becomes <code>-f mp4</code>, which picked a pre-merged file, often 360p.</li>
+            <li>mp4 and webm prefer streams that already use that container, still limited to the chosen height, then the normal quality selector. mkv muxes the normal selection into mkv.</li>
+            <li>A real format id such as <code>137+140</code> is unchanged. <code>--audio-only</code> still passes <code>mp3</code>, <code>m4a</code>, or <code>opus</code> through and does not remux.</li>
+          </ul>
+        </div>
+      </article>
+
             <!-- v0.14.0 Release -->
       <article class="release-box" id="v0-14-0">
         <div class="release-header">
           <div>
             <div style="display: flex; align-items: center; gap: 8px;">
-              <span class="release-tag-pill">v0.14.0 Stable</span>
+              <span class="sidebar-tag">v0.14.0</span>
               <span class="release-date">Released October 2026</span>
             </div>
             <h2 class="release-title">Offline Study Module, BitTorrent Telemetry &amp; Course Platform Upgrades</h2>
@@ -2042,7 +2071,8 @@
         <span>On this page</span>
       </div>
       <ul class="toc-list" id="tocList">
-        <li><a href="#v0-14-0" class="toc-link">v0.14.0 (Latest Stable)</a></li>
+        <li><a href="#v0-15-4" class="toc-link">v0.15.4 (Latest Stable)</a></li>
+        <li><a href="#v0-14-0" class="toc-link">v0.14.0</a></li>
         <li><a href="#v0-13-0" class="toc-link">v0.13.0</a></li>
         <li><a href="#v0-12-2" class="toc-link">v0.12.2</a></li>
         <li><a href="#v0-12-1" class="toc-link">v0.12.1</a></li>
@@ -2104,7 +2134,7 @@
         </li>
         <li class="search-result-item" onclick="location.href='../changelog/'">
           <span class="search-result-title">Release Notes &amp; Changelog</span>
-          <span class="search-result-desc">Version v0.14.0 updates, Offline Study module, BitTorrent speed &amp; remaining telemetry, Skool &amp; Udemy fixes</span>
+          <span class="search-result-desc">Version v0.15.4: the CLI --format option selects an mp4, mkv, or webm container</span>
         </li>
       </ul>
     </div>

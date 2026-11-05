@@ -5035,6 +5035,10 @@
         "video_button": "Extensión del navegador: aparece un botón «Descargar con OmniGet» sobre los vídeos al pasar el cursor. Puedes desactivarlo en las opciones de la extensión.",
         "about_maintainer": "La página Acerca de ahora acredita al mantenedor, Corpse.",
         "fork_links": "Los enlaces de la aplicación, la extensión y la documentación ahora apuntan a PixelStack1/omniget."
+      },
+      "fixes_0154": {
+        "title": "Correcciones de 0.15.4",
+        "cli_container": "La opción --format de la línea de comandos ahora elige el contenedor (mp4, mkv o webm) en la calidad elegida. Ya no se envía a yt-dlp como un id de formato, así que 1080p y 2160p no se sustituyen por un archivo de 360p. Un id real, como 137+140, no cambia."
       }
     }
   },

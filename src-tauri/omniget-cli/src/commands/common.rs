@@ -150,6 +150,9 @@ pub fn download_options(
         download_subtitles,
         include_auto_subtitles: false,
         download_mode: audio_only.then(|| "audio".to_string()),
+        // Container keywords stay in format_id so every platform forwards them.
+        // download_video turns mp4/mkv/webm into a height-limited selector.
+        // Audio codecs are forwarded unchanged.
         audio_format: audio_only.then(|| format.clone()).flatten(),
         format_id: (!audio_only).then(|| format.clone()).flatten(),
         referer: None,
@@ -165,5 +168,54 @@ pub fn download_options(
         torrent_files: None,
         torrent_auto_trackers: true,
         torrent_upnp: false,
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    fn opts(
+        audio_only: bool,
+        format: Option<&str>,
+    ) -> omniget_core::models::media::DownloadOptions {
+        download_options(
+            PathBuf::from("/tmp/out"),
+            Some(2160),
+            audio_only,
+            None,
+            format.map(str::to_string),
+            None,
+        )
+    }
+
+    #[test]
+    fn cli_forwards_container_keywords_for_the_core_to_interpret() {
+        for container in ["mp4", "mkv", "webm"] {
+            let video = opts(false, Some(container));
+            assert_eq!(video.format_id.as_deref(), Some(container));
+            assert_eq!(video.audio_format, None);
+            assert_eq!(video.quality.as_deref(), Some("2160"));
+            assert!(video.custom_ytdlp_args.is_none());
+        }
+    }
+
+    #[test]
+    fn cli_preserves_explicit_format_ids() {
+        for id in ["137", "18", "137+140", "bv*+ba/b"] {
+            let video = opts(false, Some(id));
+            assert_eq!(video.format_id.as_deref(), Some(id), "{id}");
+            assert_eq!(video.audio_format, None);
+        }
+    }
+
+    #[test]
+    fn cli_audio_only_forwards_the_codec_unchanged() {
+        for codec in ["mp3", "m4a", "opus", "mp4"] {
+            let audio = opts(true, Some(codec));
+            assert_eq!(audio.audio_format.as_deref(), Some(codec), "{codec}");
+            assert_eq!(audio.format_id, None);
+            assert_eq!(audio.download_mode.as_deref(), Some("audio"));
+        }
     }
 }

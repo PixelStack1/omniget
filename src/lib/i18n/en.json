@@ -5035,6 +5035,10 @@
         "video_button": "Browser extension: a “Download with OmniGet” button appears on videos when you hover them. You can turn it off in the extension options.",
         "about_maintainer": "The About page now credits the maintainer, Corpse.",
         "fork_links": "Links in the app, the extension and the docs now point to PixelStack1/omniget."
+      },
+      "fixes_0154": {
+        "title": "Fixes in 0.15.4",
+        "cli_container": "The command-line --format option now chooses the container (mp4, mkv or webm) at the quality you picked. It is no longer sent to yt-dlp as a format id, so 1080p and 2160p are not replaced by a 360p file. A real format id such as 137+140 is unchanged."
       }
     }
   },

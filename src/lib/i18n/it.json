@@ -5035,6 +5035,10 @@
         "video_button": "Estensione del browser: sui video compare un pulsante «Scarica con OmniGet» al passaggio del mouse. Puoi disattivarlo nelle opzioni dell'estensione.",
         "about_maintainer": "La pagina Informazioni ora riconosce il manutentore, Corpse.",
         "fork_links": "I link dell'app, dell'estensione e della documentazione ora puntano a PixelStack1/omniget."
+      },
+      "fixes_0154": {
+        "title": "Correzioni della 0.15.4",
+        "cli_container": "L'opzione --format della riga di comando ora sceglie il contenitore (mp4, mkv o webm) alla qualità richiesta. Non viene più passata a yt-dlp come id di formato, quindi 1080p e 2160p non diventano un file a 360p. Un id reale, come 137+140, resta invariato."
       }
     }
   },
