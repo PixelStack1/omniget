@@ -83,7 +83,7 @@
 
       --text: #171717;
       --text-muted: #666666;
-      --text-subtle: #888888;
+      --text-subtle: #6e6e6e;
       --text-inverse: #ffffff;
 
       --primary: #171717;
@@ -132,7 +132,7 @@
 
       --text: #ededed;
       --text-muted: #a1a1aa;
-      --text-subtle: #71717a;
+      --text-subtle: #868686;
       --text-inverse: #000000;
 
       --primary: #ededed;
@@ -823,8 +823,8 @@
       align-items: center;
       justify-content: space-between;
       gap: 12px;
-      height: 44px;
-      padding: 0 8px 0 16px;
+      min-height: 44px;
+      padding: 8px 8px 8px 16px;
       background: var(--code-header);
       border-bottom: 1px solid var(--code-border);
     }
@@ -833,9 +833,8 @@
       font-family: var(--font-mono);
       font-size: 12.5px;
       color: #a1a1aa;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      min-width: 0;
+      overflow-wrap: anywhere;
     }
 
     .btn-copy {
@@ -879,7 +878,7 @@
     }
 
     .tok-c {
-      color: #737373;
+      color: #8a8a8a;
     }
 
     /* ---------- Prev / next pagination ---------- */
@@ -1196,6 +1195,7 @@
 
     @media (max-width: 768px) {
       .nav-links { display: none; }
+      .nav-subtabs { display: none; }
       .brand-badge { display: none; }
       .mobile-sidebar-toggle { display: flex; }
       .search-trigger {
@@ -1415,7 +1415,7 @@
           <li>
             <a href="../courses/" class="sidebar-link">
               <span>36 Course Platforms</span>
-              <span class="sidebar-tag">v0.15.3</span>
+              <span class="sidebar-tag">v0.15.4</span>
             </a>
           </li>
         </ul>
@@ -1570,10 +1570,12 @@
   <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" /></svg><span>Copy</span></button>
         </div>
         <div class="code-body">
-<pre><code><span class="tok-c"># Strip quarantine attribute:</span>
+<pre><code><span class="tok-c"># Strip quarantine attribute:
+</span>
 xattr -cr /Applications/omniget.app
 
-<span class="tok-c"># Re-sign the app ad-hoc:</span>
+<span class="tok-c"># Re-sign the app ad-hoc:
+</span>
 codesign --force --deep --sign - /Applications/omniget.app</code></pre>
         </div>
       </div>
@@ -1595,13 +1597,16 @@ codesign --force --deep --sign - /Applications/omniget.app</code></pre>
   <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" /></svg><span>Copy</span></button>
         </div>
         <div class="code-body">
-<pre><code><span class="tok-c"># Ubuntu / Debian / Linux Mint:</span>
+<pre><code><span class="tok-c"># Ubuntu / Debian / Linux Mint:
+</span>
 sudo apt install gstreamer1.0-plugins-good gstreamer1.0-plugins-bad gstreamer1.0-libav
 
-<span class="tok-c"># Fedora / RHEL:</span>
+<span class="tok-c"># Fedora / RHEL:
+</span>
 sudo dnf install gstreamer1-plugins-good gstreamer1-plugins-bad-free gstreamer1-plugin-libav
 
-<span class="tok-c"># Arch Linux:</span>
+<span class="tok-c"># Arch Linux:
+</span>
 sudo pacman -S gst-plugins-good gst-plugins-bad gst-libav</code></pre>
         </div>
       </div>

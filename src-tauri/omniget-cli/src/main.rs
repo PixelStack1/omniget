@@ -36,7 +36,10 @@ enum Commands {
         #[arg(long, help = "Subtitle languages (e.g. en,zh-Hans)")]
         subs: Option<String>,
 
-        #[arg(long, help = "Format preference (mp4/mkv/webm)")]
+        #[arg(
+            long,
+            help = "Output container (mp4/mkv/webm), combined with -q; a yt-dlp format id (e.g. 137, 137+140) is also accepted. With --audio-only: audio format (mp3/m4a/opus...)"
+        )]
         format: Option<String>,
     },
     /// Preview media info without downloading

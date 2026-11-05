@@ -5035,6 +5035,10 @@
         "video_button": "浏览器扩展：将鼠标悬停在视频上时会出现“使用 OmniGet 下载”按钮，可在扩展选项中关闭。",
         "about_maintainer": "关于页面现在注明维护者 Corpse。",
         "fork_links": "应用、扩展和文档中的链接现在指向 PixelStack1/omniget。"
+      },
+      "fixes_0154": {
+        "title": "0.15.4 修复",
+        "cli_container": "命令行的 --format 现在按所选画质选择容器（mp4、mkv 或 webm）。它不再作为格式 ID 传给 yt-dlp，因此 1080p 和 2160p 不会被换成 360p 文件。像 137+140 这样的真实格式 ID 保持不变。"
       }
     }
   },
