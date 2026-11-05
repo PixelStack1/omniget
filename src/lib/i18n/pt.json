@@ -5035,6 +5035,10 @@
         "video_button": "Extensão do navegador: um botão “Baixar com o OmniGet” aparece nos vídeos ao passar o mouse. Você pode desativá-lo nas opções da extensão.",
         "about_maintainer": "A página Sobre agora credita o mantenedor, Corpse.",
         "fork_links": "Os links do app, da extensão e da documentação agora apontam para PixelStack1/omniget."
+      },
+      "fixes_0154": {
+        "title": "Correções da 0.15.4",
+        "cli_container": "A opção --format da linha de comando agora escolhe o contêiner (mp4, mkv ou webm) em vez de ser enviada ao yt-dlp como um id de formato."
       }
     }
   },

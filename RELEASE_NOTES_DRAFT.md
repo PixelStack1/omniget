@@ -1,3 +1,11 @@
+# OmniGet v0.15.4 – draft release notes (based on v0.15.3)
+
+Local draft only. Nothing has been tagged, pushed to main, or published.
+
+## Fixes
+- CLI: `omniget download --format` now selects the output container (`mp4`, `mkv`, or `webm`) and passes it as `--merge-output-format`. It is no longer sent to yt-dlp as a format id (`-f mp4`), which picked one progressive stream instead of the best video and audio merged into that container.
+- With `--audio-only`, `mp4` and `mkv` map to `m4a`, and `webm` maps to `opus`. A real audio codec such as `mp3` is unchanged. A real yt-dlp format id such as `22` or `bv*+ba/b` is still a format selector.
+
 # OmniGet v0.15.3 – draft release notes (based on v0.15.2)
 
 ## What's new

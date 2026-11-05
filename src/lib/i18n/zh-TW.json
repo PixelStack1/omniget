@@ -5035,6 +5035,10 @@
         "video_button": "瀏覽器擴充功能：將滑鼠移到影片上時會出現「使用 OmniGet 下載」按鈕，可在擴充功能選項中關閉。",
         "about_maintainer": "關於頁面現在註明維護者 Corpse。",
         "fork_links": "應用程式、擴充功能和文件中的連結現在指向 PixelStack1/omniget。"
+      },
+      "fixes_0154": {
+        "title": "0.15.4 修正",
+        "cli_container": "命令列的 --format 現在用來選擇容器（mp4、mkv 或 webm），不再當作格式 ID 傳給 yt-dlp。"
       }
     }
   },

@@ -5035,6 +5035,10 @@
         "video_button": "Extension de navigateur : un bouton « Télécharger avec OmniGet » apparaît sur les vidéos au survol. Vous pouvez le désactiver dans les options de l'extension.",
         "about_maintainer": "La page À propos crédite désormais le mainteneur, Corpse.",
         "fork_links": "Les liens de l'application, de l'extension et de la documentation pointent désormais vers PixelStack1/omniget."
+      },
+      "fixes_0154": {
+        "title": "Corrections de la 0.15.4",
+        "cli_container": "L'option --format en ligne de commande choisit désormais le conteneur (mp4, mkv ou webm) au lieu d'être envoyée à yt-dlp comme identifiant de format."
       }
     }
   },

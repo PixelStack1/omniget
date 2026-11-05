@@ -5035,6 +5035,10 @@
         "video_button": "ブラウザー拡張機能: 動画にカーソルを合わせると「OmniGet でダウンロード」ボタンが表示されます。拡張機能のオプションでオフにできます。",
         "about_maintainer": "「情報」ページにメンテナーの Corpse を表示するようになりました。",
         "fork_links": "アプリ、拡張機能、ドキュメント内のリンクが PixelStack1/omniget を指すようになりました。"
+      },
+      "fixes_0154": {
+        "title": "0.15.4 の修正",
+        "cli_container": "コマンドラインの --format は、yt-dlp のフォーマット ID ではなく、コンテナ（mp4、mkv、webm）を選ぶようになりました。"
       }
     }
   },
